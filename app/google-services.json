@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "714402078251",
+    "firebase_url": "https://marvelapp-aye.firebaseio.com",
+    "project_id": "marvelapp-aye",
+    "storage_bucket": "marvelapp-aye.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714402078251:android:6004206f8e1efcdc30146e",
+        "android_client_info": {
+          "package_name": "com.empresa.myapplication.marvelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714402078251-ij1ampjfe032244gg72bgnklpa4hhj7s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.empresa.myapplication.marvelapp",
+            "certificate_hash": "69e529c0817aff610610d86500c659b99661d5c5"
+          }
+        },
+        {
+          "client_id": "714402078251-2sdn9rguve0j35gn3kihgrkkb0jq651m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkYGaIhScr39j4ma1Do8yVjYS-jHprG3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714402078251-2sdn9rguve0j35gn3kihgrkkb0jq651m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
