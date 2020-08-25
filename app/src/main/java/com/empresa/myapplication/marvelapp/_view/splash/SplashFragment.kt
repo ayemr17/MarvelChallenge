@@ -34,6 +34,8 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // escondemos actionBar
         (activity as AppCompatActivity?)!!.supportActionBar?.hide()
 
         // consultamos estado de logueo en preference para ir a pantalla principal o al login con firebase
@@ -43,6 +45,7 @@ class SplashFragment : Fragment() {
         launchAnimation()
     }
 
+    // para generar animacion transitoria de splash
     @SuppressLint("ObsoleteSdkInt")
     private fun launchAnimation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -65,6 +68,7 @@ class SplashFragment : Fragment() {
         }, 3000)
     }
 
+    // verificamos si ya esta logueado o no y en base a eso vamos a login o home
     private fun launchLoginOrHome() {
         if (auth.equals("deslogueado")) {
             findNavController().navigate(R.id.action_splashFragment_to_loginFragment)

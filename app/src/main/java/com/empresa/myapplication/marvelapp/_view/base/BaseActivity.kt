@@ -16,24 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 abstract class BaseActivity : AppCompatActivity() {
 
     protected open val TAG = this.javaClass.simpleName
-    var progressBarDialog: AlertDialog? = null
-    private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "OPEN ACTIVITY $TAG")
         super.onCreate(savedInstanceState)
-    }
-
-    fun setProgressBar(bar: ProgressBar) {
-        progressBar = bar
-    }
-
-    fun showProgressBar() {
-        progressBar?.visibility = View.VISIBLE
-    }
-
-    fun hideProgressBar() {
-        progressBar?.visibility = View.INVISIBLE
     }
 
     fun hideKeyboard(view: View) {

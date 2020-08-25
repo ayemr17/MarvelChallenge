@@ -9,6 +9,9 @@ import com.empresa.myapplication.marvelapp.vo.Resource
  */
 
 class EventosRepositoryImpl(private  val dataSource: DataSource) : EventosRepositoryInter {
+
+    // aca es donde manejamos los datos devueltos por la api y proximamente room tambien
+
     override suspend fun getEventsForApi(): Resource<List<ResultEventos>> {
         return dataSource.getAllEvents()
     }

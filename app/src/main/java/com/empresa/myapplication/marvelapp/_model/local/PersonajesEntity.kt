@@ -12,6 +12,8 @@ import kotlinx.android.parcel.Parcelize
  * Created by Ayelen Merigo on 24/8/2020.
  */
 
+// Ya esta creandose la clase para avanzar con guardado en Room
+
 @Entity
 @Parcelize
 data class PersonajesEntity(

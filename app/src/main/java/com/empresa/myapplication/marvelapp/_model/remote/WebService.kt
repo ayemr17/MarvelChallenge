@@ -12,6 +12,8 @@ import retrofit2.http.GET
 
 interface WebService {
 
+    // aca es donde hacemos concretamente la llamada con su respectiva ruta
+
     @GET("characters?apikey=3a783b25c80e1c44875356dd363f272d&hash=51a3ecf2f92a23817992a2663183325e&ts=1")
     suspend fun getAllCharacters() : PersonajesPojo
 

@@ -11,6 +11,8 @@ import com.empresa.myapplication.marvelapp.vo.Resource
 
 class PersonajeRepositoryImpl(private  val dataSource: DataSource) : PersonajeRepositoryInter {
 
+    // aca es donde manejamos los datos devueltos por la api y proximamente room tambien
+
     override suspend fun getCharactersForApi(): Resource<List<Result>> {
         return dataSource.getAllCharacters()
     }

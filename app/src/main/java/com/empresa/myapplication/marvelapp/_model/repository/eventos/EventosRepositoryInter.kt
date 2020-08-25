@@ -9,6 +9,7 @@ import com.empresa.myapplication.marvelapp.vo.Resource
  */
 
 interface EventosRepositoryInter {
+    // intefaz que funciona para abstraer las consultas
 
     suspend fun getEventsForApi() : Resource<List<ResultEventos>>
 

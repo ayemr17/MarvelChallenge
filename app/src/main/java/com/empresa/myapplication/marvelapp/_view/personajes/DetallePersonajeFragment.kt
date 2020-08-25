@@ -32,8 +32,9 @@ import kotlinx.android.synthetic.main.fragment_detalle_personaje.*
 class DetallePersonajeFragment : Fragment(), BasicMethods {
 
     val STATUS_LOGIN = "status_login"
-
     private lateinit var pj: Result
+
+    // inyectamos las dependencias necesarias
     private val personajesViewModel by viewModels<PersonajesViewModel> {
         PersonajeVMFactory(
             PersonajeRepositoryImpl(
@@ -47,6 +48,7 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         savedInstanceState: Bundle?
     ): View? {
 
+        // capturamos los extras enviiados por el fragment anterior y lo convertimos nuevamente en objeto para manipularlo
         requireArguments().let {
             pj = it.getParcelable("personaje")!!
         }
@@ -60,9 +62,11 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
 
         (activity as AppCompatActivity?)!!.supportActionBar?.show()
 
+        // cambiamos titulo de actionBar y hacemos visible imagen de X
         title_appbar.text = pj.name?.toUpperCase()
         imageView_close_appbar.visibility = View.VISIBLE
 
+        // cargamos todos los datos que nos trajo el objeto para mostrarlos en pantalla
         var options: RequestOptions = RequestOptions()
             .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -96,43 +100,22 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         }
 
         signout_imageView_appbar.setOnClickListener {
-            signOut()
+            if (personajesViewModel.signOut(requireActivity())) {
+                findNavController().navigate(R.id.action_global_LoginFrafment)
+            }
         }
     }
 
     private fun setupRecyclerView() {
+        // iniciamos recycler y le agregamos separador entre items
         listComic_recyclerView_detalle.layoutManager = LinearLayoutManager(requireContext())
         listComic_recyclerView_detalle.isNestedScrollingEnabled = false
         listComic_recyclerView_detalle.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     }
 
     private fun loadAdapter() {
+        // cargamos el recycler
         listComic_recyclerView_detalle.adapter =
             RecyclerViewListaComicsAdapter(requireContext(), pj.comics?.items!!)
-    }
-
-    private fun signOut() {
-        AuthUI.getInstance()
-            .signOut(requireActivity().applicationContext)
-            .addOnCompleteListener {
-
-                // se cambia el status de login guardado en las preferencias
-                val sharedPref = activity?.getSharedPreferences(
-                    getString(R.string.preferencias), Context.MODE_PRIVATE
-                )
-                    ?: return@addOnCompleteListener
-                with(sharedPref.edit()) {
-                    putString(STATUS_LOGIN, getString(R.string.deslogueado))
-                    commit()
-                }
-                findNavController().navigate(R.id.action_global_LoginFrafment)
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.fallo_deslogueo),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
     }
 }

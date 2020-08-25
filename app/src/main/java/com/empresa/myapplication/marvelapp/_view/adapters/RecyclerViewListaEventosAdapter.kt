@@ -69,6 +69,7 @@ class RecyclerViewListaEventosAdapter(
                 .into(itemView.imagenEvento_imageView_eventos)
             itemView.nombreEvento_textView_eventos.text = item.title
 
+            // espacio donde trabajamos con las fechas otorgadas por la api
             val dateStart : Date
             val dateEnd : Date
             var fechaInicio  = ""
@@ -96,6 +97,8 @@ class RecyclerViewListaEventosAdapter(
             } catch (e: ParseException) {
                 e.printStackTrace()
             }
+            // fin del espacio de fechas
+
             itemView.fechaEvento_textView_eventos.text = fechaInicio + "\n" + fechaFin
 
             itemView.setOnClickListener {

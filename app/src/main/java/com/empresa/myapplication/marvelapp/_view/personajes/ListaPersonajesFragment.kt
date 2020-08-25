@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_lista_personajes.*
 
 class ListaPersonajesFragment : Fragment(), BasicMethods, RecyclerViewListaPersonajesAdapter.OnPersonajeClickListener {
 
+    // inyectamos las dependencias necesarias
     private val personajesViewModel by viewModels<PersonajesViewModel> {
         PersonajeVMFactory(
             PersonajeRepositoryImpl(
@@ -51,6 +52,8 @@ class ListaPersonajesFragment : Fragment(), BasicMethods, RecyclerViewListaPerso
     }
 
     override fun initObservables() {
+        // escuchamos el livedata del viewmodel
+        // cargamos recycker con la lista entera de personajes que devuelve la api o mostramos error por pantalla con toast
         personajesViewModel.personajesList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loafing -> {
@@ -86,6 +89,7 @@ class ListaPersonajesFragment : Fragment(), BasicMethods, RecyclerViewListaPerso
     }
 
     override fun onPersonajeClick(pj: Result) {
+        // guardamos objeto para pasarlo al siguiente fragment como extra
         val bundle = Bundle()
         bundle.putParcelable("personaje", pj)
         findNavController().navigate(R.id.action_viewPagerFragment_to_detallePersonajeFragment, bundle)

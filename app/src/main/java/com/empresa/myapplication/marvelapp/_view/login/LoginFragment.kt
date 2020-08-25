@@ -34,6 +34,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         (activity as AppCompatActivity?)!!.supportActionBar?.hide()
 
         auth = FirebaseAuth.getInstance()
@@ -92,22 +93,5 @@ class LoginFragment : Fragment() {
             putString(STATUS_LOGIN, status)
             commit()
         }
-    }
-
-    private fun signOut() {
-        AuthUI.getInstance()
-            .signOut(requireActivity().applicationContext)
-            .addOnCompleteListener {
-                // se cambia el status de login guardado en las preferencias
-                saveStatusLogin(getString(R.string.deslogueado))
-                showSignInOptions(providers)
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.fallo_deslogueo),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
     }
 }

@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.item_recyclerview_eventos.view.*
 class EventosFragment : Fragment(), BasicMethods,
     RecyclerViewListaEventosAdapter.OnEventoClickListener {
 
+    // inyectamos las dependencias necesarias
     private val eventosViewModel by viewModels<EventosViewModel> {
         EventosVMFactory(
             EventosRepositoryImpl(
@@ -53,6 +54,7 @@ class EventosFragment : Fragment(), BasicMethods,
     }
 
     override fun initObservables() {
+        // escuchamos el livedata del viewModel para traer datos de la API
         eventosViewModel.eventosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loafing -> {

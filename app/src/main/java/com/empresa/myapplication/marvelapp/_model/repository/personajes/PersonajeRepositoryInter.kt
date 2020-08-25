@@ -9,6 +9,8 @@ import com.empresa.myapplication.marvelapp.vo.Resource
  */
 
 interface PersonajeRepositoryInter {
+    // intefaz que funciona para abstraer las consultas
+
     suspend fun getCharactersForApi() : Resource<List<Result>>
 
 

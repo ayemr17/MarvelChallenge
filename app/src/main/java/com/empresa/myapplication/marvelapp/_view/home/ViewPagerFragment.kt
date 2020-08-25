@@ -52,7 +52,6 @@ class ViewPagerFragment : Fragment(), BasicMethods {
     override fun initListeners() {
         signout_imageView_appbar.setOnClickListener {
             signOut()
-            //Toast.makeText(requireContext(), "Aca nos deslogueamos", Toast.LENGTH_SHORT).show()
         }
     }
 

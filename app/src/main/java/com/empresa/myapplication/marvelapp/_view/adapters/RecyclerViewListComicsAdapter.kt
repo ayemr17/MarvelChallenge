@@ -18,6 +18,7 @@ class RecyclerViewListComicsAdapter(
     private val context: Context,
     private val comicsList: List<Item>,
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         return ComicViewHolder(
             LayoutInflater.from(context).inflate(R.layout.item_recyclerview_detalle, parent, false)
