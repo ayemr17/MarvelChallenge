@@ -42,6 +42,9 @@ class ListaPersonajesFragment : Fragment(), BasicMethods, RecyclerViewListaPerso
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        listaPj_recyclerView.visibility = View.VISIBLE
+        contenedor_sinseñal.visibility = View.GONE
+
         initObservables()
         init()
         initListeners()
@@ -60,6 +63,8 @@ class ListaPersonajesFragment : Fragment(), BasicMethods, RecyclerViewListaPerso
                 }
                 is Resource.Failure -> {
                     progressBar.visibility = View.GONE
+                    listaPj_recyclerView.visibility = View.GONE
+                    contenedor_sinseñal.visibility = View.VISIBLE
                     Toast.makeText(
                         requireContext(),
                         "Hubo un error al traer los datos: ${result.exception}",

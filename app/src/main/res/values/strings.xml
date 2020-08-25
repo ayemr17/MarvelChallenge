@@ -26,5 +26,7 @@
     <string name="comics_a_discutir">COMICS A DISCUTIR</string>
     <string name="sin_comics">No tiene comics a debatir.</string>
     <string name="sin_descrip">Este personaje no posee una descripción agregada.</string>
+    <string name="fecha_inicio">Sin fecha de inicio</string>
+    <string name="fecha_fin">Sin fecha de finalización</string>
 
 </resources>

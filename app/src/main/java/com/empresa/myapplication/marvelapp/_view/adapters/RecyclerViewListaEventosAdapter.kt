@@ -80,7 +80,7 @@ class RecyclerViewListaEventosAdapter(
                     val simpleDateFormat = SimpleDateFormat("dd MMMM yyyy")
                     fechaInicio = simpleDateFormat.format(dateStart)
                 } else {
-                    fechaInicio = "Sin fecha de inicio"
+                    fechaInicio = context.getString(R.string.fecha_inicio)
                 }
             } catch (e: ParseException) {
                 e.printStackTrace()
@@ -91,7 +91,7 @@ class RecyclerViewListaEventosAdapter(
                     val simpleDateFormat = SimpleDateFormat("dd MMMM yyyy")
                     fechaFin = simpleDateFormat.format(dateEnd)
                 } else {
-                    fechaFin = "Sin fecha de fin"
+                    fechaFin = context.getString(R.string.fecha_fin)
                 }
             } catch (e: ParseException) {
                 e.printStackTrace()
