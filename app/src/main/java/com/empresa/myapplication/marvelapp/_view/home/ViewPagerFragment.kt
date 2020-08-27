@@ -2,6 +2,8 @@ package com.empresa.myapplication.marvelapp._view.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.ActionProvider
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.empresa.myapplication.marvelapp.R
+import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._view.adapters.MyViewPagerAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._view.eventos.EventosFragment
 import com.empresa.myapplication.marvelapp._view.personajes.ListaPersonajesFragment
+import com.empresa.myapplication.marvelapp.util.ProviderType
+import com.facebook.login.LoginManager
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.app_bar_custom.*
@@ -22,6 +27,8 @@ import kotlinx.android.synthetic.main.fragment_view_pager.*
 class ViewPagerFragment : Fragment(), BasicMethods {
 
     val STATUS_LOGIN = "status_login"
+    private var email: String = ""
+    private var provider: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +44,16 @@ class ViewPagerFragment : Fragment(), BasicMethods {
         (activity as AppCompatActivity?)!!.supportActionBar!!.title =
             getString(R.string.app_name)
         (activity as AppCompatActivity?)!!.supportActionBar?.show()
+
+        // capturamos los extras enviiados por el fragment anterior y lo convertimos nuevamente en objeto para manipularlo
+        try {
+            requireArguments().let {
+                email = it.getString("email", "")
+                provider = it.getString("provider", "")
+            }
+        } catch (e: Exception) {
+            Log.e("getArgumentsViewPage", "onViewCreated: ${e.message}")
+        }
 
         initObservables()
         init()
@@ -83,10 +100,17 @@ class ViewPagerFragment : Fragment(), BasicMethods {
     }
 
     private fun signOut() {
+        if (provider.equals(ProviderType.FACEBOOK.name)) {
+            try {
+                LoginManager.getInstance().logOut()
+            } catch (e:Exception) {
+                Log.e("logOffFacebook", "signOut: ${e.message}")
+            }
+        }
+
         AuthUI.getInstance()
             .signOut(requireActivity().applicationContext)
             .addOnCompleteListener {
-
                 // se cambia el status de login guardado en las preferencias
                 val sharedPref = activity?.getSharedPreferences(
                     getString(R.string.preferencias), Context.MODE_PRIVATE
@@ -96,7 +120,8 @@ class ViewPagerFragment : Fragment(), BasicMethods {
                     putString(STATUS_LOGIN, getString(R.string.deslogueado))
                     commit()
                 }
-                findNavController().navigate(R.id.action_global_LoginFrafment)
+
+                findNavController().navigate(R.id.action_global_LoginFrafmentNew)
             }
             .addOnFailureListener {
                 Toast.makeText(

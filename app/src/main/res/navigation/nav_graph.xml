@@ -31,6 +31,11 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragmentNew"
+            app:destination="@id/loginFragmentNew"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
@@ -59,4 +64,16 @@
     <action
         android:id="@+id/action_global_LoginFrafment"
         app:destination="@id/loginFragment" />
+    <action
+        android:id="@+id/action_global_LoginFrafmentNew"
+        app:destination="@id/loginFragmentNew" />
+    <fragment
+        android:id="@+id/loginFragmentNew"
+        android:name="com.empresa.myapplication.marvelapp._view.login.LoginFragmentNew"
+        android:label="fragment_login_new"
+        tools:layout="@layout/fragment_login_new" >
+        <action
+            android:id="@+id/action_loginFragmentNew_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </fragment>
 </navigation>

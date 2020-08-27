@@ -71,7 +71,7 @@ class SplashFragment : Fragment() {
     // verificamos si ya esta logueado o no y en base a eso vamos a login o home
     private fun launchLoginOrHome() {
         if (auth.equals("deslogueado")) {
-            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_loginFragmentNew)
         } else {
             findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
         }

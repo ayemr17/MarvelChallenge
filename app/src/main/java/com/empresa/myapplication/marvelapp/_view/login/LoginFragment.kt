@@ -4,23 +4,25 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.empresa.myapplication.marvelapp.R
 import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.AuthUI.IdpConfig
+import com.firebase.ui.auth.AuthUI.IdpConfig.FacebookBuilder
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
-import java.util.ArrayList
+import java.util.*
 
 class LoginFragment : Fragment() {
 
     private val RC_SIGN_IN = 123
-    lateinit var providers: ArrayList<AuthUI.IdpConfig>
+    lateinit var providers: ArrayList<IdpConfig>
     private lateinit var auth: FirebaseAuth
     val STATUS_LOGIN = "status_login"
 
@@ -44,8 +46,12 @@ class LoginFragment : Fragment() {
     fun generarLoginUI() {
         // elegimos las opciones de logueo para nuestra app
         providers = arrayListOf(
-            AuthUI.IdpConfig.FacebookBuilder().build(),  // logueo con facebook
-            AuthUI.IdpConfig.EmailBuilder().build()  // logueo con email y pass
+            IdpConfig.EmailBuilder().build(),  // logueo con email y pass
+            FacebookBuilder()
+                .setPermissions(
+                    listOf("email", "public_profile")
+                )
+                .build()  // logueo con facebook
         )
         showSignInOptions(providers)
     }
@@ -55,6 +61,7 @@ class LoginFragment : Fragment() {
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setIsSmartLockEnabled(false)
                 .setTheme(R.style.AppTheme)
                 .setLogo(R.drawable.marvel_png_login)
                 .build(),

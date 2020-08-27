@@ -19,26 +19,24 @@
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/imagenEvento_contraint_eventos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/imagenEvento_contraint_eventos"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
-            app:cardCornerRadius="10dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imagenEvento_imageView_eventos"
                 android:layout_width="86dp"
                 android:layout_height="86dp"
-                android:scaleType="centerCrop"
-
-                />
-                <!--app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"-->
+                android:background="@drawable/shape_boton_azul"
+                android:scaleType="centerCrop" />
+            <!--app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"-->
 
         </androidx.cardview.widget.CardView>
 
@@ -48,11 +46,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_regular"
             android:maxLines="1"
             android:text="TextView"
-            android:layout_marginEnd="16dp"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/ic_flechita_evento"
             app:layout_constraintHorizontal_bias="0.0"
@@ -65,8 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_regular"
-            android:textSize="14sp"
             android:text="TextView"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/nombreEvento_textView_eventos"
             app:layout_constraintTop_toBottomOf="@+id/nombreEvento_textView_eventos" />
 
@@ -75,10 +73,10 @@
             android:layout_width="18dp"
             android:layout_height="11dp"
             android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_bottom"
             app:layout_constraintBottom_toTopOf="@+id/expandableLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_bottom" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/expandableLayout"
@@ -87,20 +85,20 @@
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             android:visibility="gone"
-            app:layout_goneMarginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imagenEvento_contraint_eventos">
+            app:layout_constraintTop_toBottomOf="@+id/imagenEvento_contraint_eventos"
+            app:layout_goneMarginTop="16dp">
 
             <TextView
                 android:id="@+id/texto_title_comics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/comics_a_discutir"
-                android:fontFamily="@font/roboto_black"
-                android:textSize="20sp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/comics_a_discutir"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -114,7 +112,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/texto_title_comics"
-                tools:listitem="@layout/item_recyclerview_detalle"/>
+                tools:listitem="@layout/item_recyclerview_detalle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

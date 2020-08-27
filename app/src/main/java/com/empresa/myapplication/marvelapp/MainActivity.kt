@@ -12,7 +12,11 @@ import com.empresa.myapplication.marvelapp._view.base.BaseActivity
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._view.home.ViewPagerFragment
 import com.empresa.myapplication.marvelapp._view.login.LoginFragment
+import com.empresa.myapplication.marvelapp._view.login.LoginFragmentNew
 import com.empresa.myapplication.marvelapp._view.splash.SplashFragment
+import com.facebook.FacebookSdk
+import com.facebook.FacebookSdk.*
+import com.facebook.appevents.AppEventsLogger
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_main.view.signOut_Button_activityMain
@@ -54,7 +58,7 @@ class MainActivity : BaseActivity(), BasicMethods {
         if (fragment.isNotEmpty()) {
             if (fragment[0] is SplashFragment) {
                 super.onBackPressed()
-            } else if (fragment[0] is LoginFragment) {
+            } else if (fragment[0] is LoginFragmentNew) {
                 super.onBackPressed()
             } else if (fragment[0] is ViewPagerFragment) {
                 super.onBackPressed()

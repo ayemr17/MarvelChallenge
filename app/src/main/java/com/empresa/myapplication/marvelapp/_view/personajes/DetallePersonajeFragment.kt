@@ -3,6 +3,7 @@ package com.empresa.myapplication.marvelapp._view.personajes
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaComic
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.PersonajeVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.personajes.PersonajesViewModel
+import com.facebook.login.LoginManager
 import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import kotlinx.android.synthetic.main.fragment_detalle_personaje.*
@@ -72,9 +74,11 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .priority(Priority.HIGH)
 
+        var uri = pj.thumbnail?.path + "." + pj.thumbnail?.extension
+
         Glide.with(requireContext())
-            .load(Uri.parse(pj.thumbnail?.path + "." + pj.thumbnail?.extension))
-            .apply(options)
+            .load(Uri.parse(uri))
+            //.apply(options)
             .into(fotoPJ_imageView_detalle)
         if (pj.description.equals("")) {
             descripcionPJ_textView_detalle.text = getString(R.string.sin_descripcion)
@@ -100,9 +104,11 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         }
 
         signout_imageView_appbar.setOnClickListener {
-            if (personajesViewModel.signOut(requireActivity())) {
+            /*if (personajesViewModel.signOut(requireActivity())) {
                 findNavController().navigate(R.id.action_global_LoginFrafment)
-            }
+            }*/
+
+            signOut()
         }
     }
 
@@ -117,5 +123,35 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         // cargamos el recycler
         listComic_recyclerView_detalle.adapter =
             RecyclerViewListaComicsAdapter(requireContext(), pj.comics?.items!!)
+    }
+
+    private fun signOut() {
+        AuthUI.getInstance()
+            .signOut(requireActivity().applicationContext)
+            .addOnCompleteListener {
+
+                // se cambia el status de login guardado en las preferencias
+                val sharedPref = activity?.getSharedPreferences(
+                    getString(R.string.preferencias), Context.MODE_PRIVATE
+                )
+                    ?: return@addOnCompleteListener
+                with(sharedPref.edit()) {
+                    putString(STATUS_LOGIN, getString(R.string.deslogueado))
+                    commit()
+                }
+                try {
+                    LoginManager.getInstance().logOut()
+                } catch (e:Exception) {
+                    Log.e("logOffFacebook", "signOut: ${e.message}")
+                }
+                findNavController().navigate(R.id.action_global_LoginFrafment)
+            }
+            .addOnFailureListener {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.fallo_deslogueo),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 }
