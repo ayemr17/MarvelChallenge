@@ -18,16 +18,16 @@ import com.empresa.myapplication.marvelapp._view.login.LoginFragmentNew
 class LoginViewModel : ViewModel() {
 
     private val loginFragmentNew = LoginFragmentNew()
-    /*private var mDatabaseRepository: DatabaseRepository? = DatabaseRepository(loginFragmentNew.sendApplication())
 
-    fun crearDatabase() {
+    fun crearDatabase(application: Application) {
+        var mDatabaseRepository: DatabaseRepository? = DatabaseRepository(application)
+
         try {
             mDatabaseRepository?.populateDatabaseLocal()
         } catch (e: Exception) {
             Log.e(ContentValues.TAG, "Error en la pre-carga de la base de datos: ${e.message}")
         }
-    }*/
-
+    }
 
 
     fun showAlert(context: Context, mensaje: String) {

@@ -1,6 +1,6 @@
 package com.empresa.myapplication.marvelapp._model.repository.eventos
 
-import com.empresa.myapplication.marvelapp._model.remote.DataSource
+import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.eventos.ResultEventos
 import com.empresa.myapplication.marvelapp.vo.Resource
 

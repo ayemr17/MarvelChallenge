@@ -28,5 +28,6 @@
     <string name="sin_descrip">Este personaje no posee una descripción agregada.</string>
     <string name="fecha_inicio">Sin fecha de inicio</string>
     <string name="fecha_fin">Sin fecha de finalización</string>
+    <string name="sin_favoritos">No has ingresado \n ningun favorito.</string>
 
 </resources>

@@ -23,36 +23,20 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
 
-        @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE
-                    ?: buildDatabase(
-                        context
-                    ).also {
-                        INSTANCE = it
-                    }
-            }
+        fun getInstance(context: Context): AppDatabase {
 
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
-                context,
-                AppDatabase::class.java, "marvelChallenge.db"
-            )
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        Log.d("ONCREATE", "Database has been created.")
-                    }
+            INSTANCE = INSTANCE ?: Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java,
+                "marvelChallenge.db"
+            ).build()
+            return INSTANCE!!
+        }
 
-                    override fun onOpen(db: SupportSQLiteDatabase) {
-                        super.onOpen(db)
-                        Log.d("ONOPEN", "Database has been opened.")
-                    }
-                })
-                .fallbackToDestructiveMigration()
-                .build()
+        fun destroyInstance() {
+            INSTANCE = null
+        }
     }
 }

@@ -11,7 +11,6 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp._model.local.FavoritosEntity
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._view.adapters.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_recyclerview_personajes.view.*
@@ -23,8 +22,7 @@ import kotlinx.android.synthetic.main.item_recyclerview_personajes.view.*
 class RecyclerViewListaPersonajesAdapter(
     private val context: Context,
     private val personajesList: List<Result>,
-    private val itemClickListener: OnPersonajeClickListener,
-    private val itemLongClickListener: OnLongPersonajeClickListener
+    private val itemClickListener: OnPersonajeClickListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -67,18 +65,10 @@ class RecyclerViewListaPersonajesAdapter(
             itemView.setOnClickListener {
                 itemClickListener.onPersonajeClick(item)
             }
-
-            itemView.setOnLongClickListener {
-                return@setOnLongClickListener itemLongClickListener.onLongClickPersonajeListener(item)
-            }
         }
     }
 
     interface OnPersonajeClickListener {
         fun onPersonajeClick(pj: Result)
-    }
-
-    interface OnLongPersonajeClickListener {
-        fun onLongClickPersonajeListener(pj: Result) : Boolean
     }
 }

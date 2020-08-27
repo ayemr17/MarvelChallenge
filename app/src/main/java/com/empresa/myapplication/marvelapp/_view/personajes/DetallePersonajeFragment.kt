@@ -19,7 +19,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp._model.remote.DataSource
+import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaComicsAdapter
@@ -40,7 +40,7 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
     private val personajesViewModel by viewModels<PersonajesViewModel> {
         PersonajeVMFactory(
             PersonajeRepositoryImpl(
-                DataSource()
+                DataSourceApi()
             )
         )
     }

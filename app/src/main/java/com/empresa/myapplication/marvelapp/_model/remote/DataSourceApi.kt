@@ -20,4 +20,6 @@ class DataSource {
         return Resource.Success(RetrofitClient.webservice.getAllEvents().data?.resultEventos!!)
     }
 
+
+
 }

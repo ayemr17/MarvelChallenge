@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp._model.remote.DataSource
+import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.eventos.ResultEventos
 import com.empresa.myapplication.marvelapp._model.repository.eventos.EventosRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListComicsAdapter
@@ -22,7 +21,6 @@ import com.empresa.myapplication.marvelapp._viewmodel.factorys.EventosVMFactory
 import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.android.synthetic.main.fragment_eventos.*
 import kotlinx.android.synthetic.main.fragment_eventos.progressBar
-import kotlinx.android.synthetic.main.item_recyclerview_eventos.*
 import kotlinx.android.synthetic.main.item_recyclerview_eventos.view.*
 
 class EventosFragment : Fragment(), BasicMethods,
@@ -32,7 +30,7 @@ class EventosFragment : Fragment(), BasicMethods,
     private val eventosViewModel by viewModels<EventosViewModel> {
         EventosVMFactory(
             EventosRepositoryImpl(
-                DataSource()
+                DataSourceApi()
             )
         )
     }

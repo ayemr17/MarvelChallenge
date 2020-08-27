@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.empresa.myapplication.marvelapp._model.local.AppDatabase
 import com.empresa.myapplication.marvelapp._model.local.FavoritosDao
-import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoritRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext

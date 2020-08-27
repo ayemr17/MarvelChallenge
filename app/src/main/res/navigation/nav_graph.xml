@@ -6,11 +6,6 @@
     app:startDestination="@id/splashFragment"
     tools:ignore="UnusedNavigation">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.empresa.myapplication.marvelapp.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/detallePersonajeFragment"
         android:name="com.empresa.myapplication.marvelapp._view.personajes.DetallePersonajeFragment"
@@ -46,6 +41,9 @@
             android:id="@+id/action_viewPagerFragment_to_detallePersonajeFragment"
             app:destination="@id/detallePersonajeFragment"
             app:popUpTo="@id/detallePersonajeFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_self"
+            app:destination="@id/viewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -76,4 +74,9 @@
             android:id="@+id/action_loginFragmentNew_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoritosFragment"
+        android:name="com.empresa.myapplication.marvelapp.FavoritosFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
 </navigation>
