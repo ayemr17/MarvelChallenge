@@ -18,7 +18,7 @@ class DatabaseRepository(private var context: Context) : CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
-    
+
     var favoritosDao : FavoritosDao
 
     init {

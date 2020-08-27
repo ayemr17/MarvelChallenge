@@ -9,8 +9,11 @@ import androidx.room.*
 @Dao
 interface FavoritosDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavorito(states : FavoritosEntity)
+    suspend fun insertFavorito(states : FavoritosEntity)
 
     @Query("SELECT * FROM _FAVORITOS")
-    fun getAllFavoritos() : List<FavoritosEntity>?
+    suspend fun getAllFavoritos() : List<FavoritosEntity>
+
+    @Delete
+    suspend fun deleteFavorito (favorito : FavoritosEntity)
 }

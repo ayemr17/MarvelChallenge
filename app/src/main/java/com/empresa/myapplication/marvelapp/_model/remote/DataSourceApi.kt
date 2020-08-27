@@ -9,7 +9,7 @@ import com.empresa.myapplication.marvelapp.vo.RetrofitClient
  * Created by Ayelen Merigo on 24/8/2020.
  */
 
-class DataSource {
+class DataSourceApi {
     // Aca iniciamos todas las llamadas a las APIs para que traigan los datos
 
     suspend fun getAllCharacters() : Resource<List<Result>> {
@@ -19,7 +19,5 @@ class DataSource {
     suspend fun getAllEvents() : Resource<List<ResultEventos>> {
         return Resource.Success(RetrofitClient.webservice.getAllEvents().data?.resultEventos!!)
     }
-
-
 
 }
