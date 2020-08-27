@@ -1,6 +1,7 @@
 package com.empresa.myapplication.marvelapp._view.login
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -240,6 +241,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
     fun goHome(email: String, provider: ProviderType) {
         progressBar.visibility = View.GONE
         loginViewModel.hideKeyboard(requireContext())
+        //loginViewModel.crearDatabase()
         saveStatusLogin(getString(R.string.logueado))
 
         val bundle = Bundle()
@@ -259,4 +261,9 @@ class LoginFragmentNew : Fragment(), BasicMethods {
             commit()
         }
     }
+
+    fun sendApplication() : Application {
+        return (activity as AppCompatActivity)!!.application
+    }
+
 }

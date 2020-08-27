@@ -1,16 +1,34 @@
 package com.empresa.myapplication.marvelapp._viewmodel.login
 
 import android.app.Activity
+import android.app.Application
+import android.content.ContentValues
 import android.content.Context
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModel
+import com.empresa.myapplication.marvelapp._model.repository.DatabaseRepository
+import com.empresa.myapplication.marvelapp._view.login.LoginFragmentNew
 
 /**
  * Created by Ayelen Merigo on 27/8/2020.
  */
 
 class LoginViewModel : ViewModel() {
+
+    private val loginFragmentNew = LoginFragmentNew()
+    /*private var mDatabaseRepository: DatabaseRepository? = DatabaseRepository(loginFragmentNew.sendApplication())
+
+    fun crearDatabase() {
+        try {
+            mDatabaseRepository?.populateDatabaseLocal()
+        } catch (e: Exception) {
+            Log.e(ContentValues.TAG, "Error en la pre-carga de la base de datos: ${e.message}")
+        }
+    }*/
+
+
 
     fun showAlert(context: Context, mensaje: String) {
         var mensajeEmit = ""
