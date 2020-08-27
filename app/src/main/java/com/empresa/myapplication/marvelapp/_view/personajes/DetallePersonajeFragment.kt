@@ -104,10 +104,6 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         }
 
         signout_imageView_appbar.setOnClickListener {
-            /*if (personajesViewModel.signOut(requireActivity())) {
-                findNavController().navigate(R.id.action_global_LoginFrafment)
-            }*/
-
             signOut()
         }
     }
@@ -144,7 +140,7 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
                 } catch (e:Exception) {
                     Log.e("logOffFacebook", "signOut: ${e.message}")
                 }
-                findNavController().navigate(R.id.action_global_LoginFrafment)
+                findNavController().navigate(R.id.action_global_LoginFrafmentNew)
             }
             .addOnFailureListener {
                 Toast.makeText(
