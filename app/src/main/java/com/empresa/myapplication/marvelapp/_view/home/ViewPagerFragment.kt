@@ -68,6 +68,9 @@ class ViewPagerFragment : Fragment(), BasicMethods {
     }
 
     override fun initListeners() {
+        favoritos_imageView_appbar.setOnClickListener {
+            findNavController().navigate(R.id.action_viewPagerFragment_to_favoritosFragment)
+        }
         signout_imageView_appbar.setOnClickListener {
             signOut()
         }
@@ -76,7 +79,7 @@ class ViewPagerFragment : Fragment(), BasicMethods {
     fun loadViewPager() {
         val fragmentList = arrayListOf<Fragment>(
             ListaPersonajesFragment(),
-            FavoritosFragment()
+            EventosFragment()
         )
         val adapter =
             MyViewPagerAdapter(fragmentList, requireActivity().supportFragmentManager, lifecycle)

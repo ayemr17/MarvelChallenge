@@ -40,18 +40,29 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/favoritos_imageView_appbar"
+                    app:layout_constraintStart_toEndOf="@+id/imageView_close_appbar"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:id="@+id/favoritos_imageView_appbar"
+                    android:layout_width="22dp"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="18dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/signout_imageView_appbar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/ic_icon_favorite" />
+
+                <ImageView
                     android:id="@+id/signout_imageView_appbar"
-                    android:layout_width="42dp"
+                    android:layout_width="25dp"
                     android:layout_height="42dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/common_full_open_on_phone" />
+                    app:srcCompat="@drawable/ic_icon_exit_to_app_" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

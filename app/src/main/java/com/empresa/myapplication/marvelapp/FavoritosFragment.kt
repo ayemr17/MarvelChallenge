@@ -1,15 +1,19 @@
 package com.empresa.myapplication.marvelapp
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.empresa.myapplication.marvelapp._model.local.AppDatabase
 import com.empresa.myapplication.marvelapp._model.local.DataSourceRoom
@@ -20,11 +24,16 @@ import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.FavoritosViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp.vo.Resource
+import com.facebook.login.LoginManager
+import com.firebase.ui.auth.AuthUI
+import kotlinx.android.synthetic.main.app_bar_custom.*
 import kotlinx.android.synthetic.main.fragment_favoritos.*
 
 class FavoritosFragment : Fragment(), BasicMethods,
     RecyclerViewListaPersonajesROOMAdapter.OnPersonajeClickListener,
     RecyclerViewListaPersonajesROOMAdapter.OnLongPersonajeClickListener {
+
+    val STATUS_LOGIN = "status_login"
 
     // inyectamos las dependencias necesarias
     private val favoritosViewModel by viewModels<FavoritosViewModel> {
@@ -45,6 +54,12 @@ class FavoritosFragment : Fragment(), BasicMethods,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity?)!!.supportActionBar?.show()
+        title_appbar.text = "FAVORITOS"
+        imageView_close_appbar.visibility = View.VISIBLE
+        favoritos_imageView_appbar.visibility = View.GONE
+        signout_imageView_appbar.visibility = View.GONE
 
         initObservables()
         init()
@@ -94,7 +109,11 @@ class FavoritosFragment : Fragment(), BasicMethods,
         setupRecyclerView()
     }
 
-    override fun initListeners() {}
+    override fun initListeners() {
+        imageView_close_appbar.setOnClickListener {
+            findNavController().navigate(R.id.action_global_ViewPagerFrafment)
+        }
+    }
 
     override fun onPersonajeClick(pj: FavoritosEntity) {}
 
@@ -111,6 +130,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
             favoritosViewModel.deleteFavorito(pj)
             favoritos_recyclerView_favoritosFragment.adapter!!.notifyItemRemoved(position)
             favoritos_recyclerView_favoritosFragment.adapter?.notifyDataSetChanged()
+            findNavController().navigate(R.id.favoritosFragment)
         })
 
         val dialog = builder.create()
