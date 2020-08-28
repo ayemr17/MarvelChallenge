@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.empresa.myapplication.marvelapp.FavoritosFragment
 import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._view.adapters.MyViewPagerAdapter
@@ -67,6 +68,9 @@ class ViewPagerFragment : Fragment(), BasicMethods {
     }
 
     override fun initListeners() {
+        favoritos_imageView_appbar.setOnClickListener {
+            findNavController().navigate(R.id.action_viewPagerFragment_to_favoritosFragment)
+        }
         signout_imageView_appbar.setOnClickListener {
             signOut()
         }

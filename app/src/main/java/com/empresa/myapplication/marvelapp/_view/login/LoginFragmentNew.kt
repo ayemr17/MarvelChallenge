@@ -1,6 +1,6 @@
 package com.empresa.myapplication.marvelapp._view.login
 
-import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,20 +9,13 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp._model.remote.DataSource
-import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
-import com.empresa.myapplication.marvelapp._viewmodel.factorys.PersonajeVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.login.LoginViewModel
-import com.empresa.myapplication.marvelapp._viewmodel.personajes.PersonajesViewModel
 import com.empresa.myapplication.marvelapp.util.ProviderType
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -240,6 +233,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
     fun goHome(email: String, provider: ProviderType) {
         progressBar.visibility = View.GONE
         loginViewModel.hideKeyboard(requireContext())
+        loginViewModel.crearDatabase(requireActivity().application)
         saveStatusLogin(getString(R.string.logueado))
 
         val bundle = Bundle()
@@ -259,4 +253,9 @@ class LoginFragmentNew : Fragment(), BasicMethods {
             commit()
         }
     }
+
+    fun sendApplication() : Application {
+        return (activity as AppCompatActivity)!!.application
+    }
+
 }

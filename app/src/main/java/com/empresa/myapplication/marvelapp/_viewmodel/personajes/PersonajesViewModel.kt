@@ -11,6 +11,7 @@ import androidx.lifecycle.liveData
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.empresa.myapplication.marvelapp.R
+import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoritRepositoryInter
 import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryInter
 import com.empresa.myapplication.marvelapp.vo.Resource
 import com.facebook.login.LoginManager
@@ -33,4 +34,6 @@ class PersonajesViewModel(private val repoPersonaje : PersonajeRepositoryInter) 
             emit(Resource.Failure(e))
         }
     }
+
+
 }

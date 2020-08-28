@@ -19,7 +19,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp._model.remote.DataSource
+import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaComicsAdapter
@@ -40,7 +40,7 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
     private val personajesViewModel by viewModels<PersonajesViewModel> {
         PersonajeVMFactory(
             PersonajeRepositoryImpl(
-                DataSource()
+                DataSourceApi()
             )
         )
     }
@@ -67,6 +67,8 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         // cambiamos titulo de actionBar y hacemos visible imagen de X
         title_appbar.text = pj.name?.toUpperCase()
         imageView_close_appbar.visibility = View.VISIBLE
+        favoritos_imageView_appbar.visibility = View.GONE
+        signout_imageView_appbar.visibility = View.GONE
 
         // cargamos todos los datos que nos trajo el objeto para mostrarlos en pantalla
         var options: RequestOptions = RequestOptions()
@@ -102,10 +104,6 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         imageView_close_appbar.setOnClickListener {
             findNavController().navigate(R.id.action_global_ViewPagerFrafment)
         }
-
-        signout_imageView_appbar.setOnClickListener {
-            signOut()
-        }
     }
 
     private fun setupRecyclerView() {
@@ -119,35 +117,5 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
         // cargamos el recycler
         listComic_recyclerView_detalle.adapter =
             RecyclerViewListaComicsAdapter(requireContext(), pj.comics?.items!!)
-    }
-
-    private fun signOut() {
-        AuthUI.getInstance()
-            .signOut(requireActivity().applicationContext)
-            .addOnCompleteListener {
-
-                // se cambia el status de login guardado en las preferencias
-                val sharedPref = activity?.getSharedPreferences(
-                    getString(R.string.preferencias), Context.MODE_PRIVATE
-                )
-                    ?: return@addOnCompleteListener
-                with(sharedPref.edit()) {
-                    putString(STATUS_LOGIN, getString(R.string.deslogueado))
-                    commit()
-                }
-                try {
-                    LoginManager.getInstance().logOut()
-                } catch (e:Exception) {
-                    Log.e("logOffFacebook", "signOut: ${e.message}")
-                }
-                findNavController().navigate(R.id.action_global_LoginFrafmentNew)
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.fallo_deslogueo),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
     }
 }
