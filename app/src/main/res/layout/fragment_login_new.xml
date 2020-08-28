@@ -10,7 +10,11 @@
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -19,6 +23,7 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,15 +68,15 @@
                         android:id="@+id/textInputEditText3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/colorTransparente"
-                        android:textColor="@color/colorBlack"
                         android:fontFamily="@font/roboto_regular"
                         android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
+                        android:textColor="@color/colorBlack"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.529"
                         app:layout_constraintStart_toStartOf="parent"
@@ -96,8 +101,8 @@
                         android:id="@+id/textInputEditText4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/colorTransparente"
                         android:fontFamily="@font/roboto_regular"

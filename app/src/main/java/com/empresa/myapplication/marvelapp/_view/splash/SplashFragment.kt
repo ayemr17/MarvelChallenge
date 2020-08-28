@@ -1,6 +1,5 @@
 package com.empresa.myapplication.marvelapp._view.splash
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.empresa.myapplication.marvelapp.R
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_splash.*
 import java.util.*
 
@@ -46,24 +44,22 @@ class SplashFragment : Fragment() {
     }
 
     // para generar animacion transitoria de splash
-    @SuppressLint("ObsoleteSdkInt")
     private fun launchAnimation() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Glide.with(this)
-                .load(R.drawable.marvel_gif)
-                .diskCacheStrategy(
-                    DiskCacheStrategy.RESOURCE
-                )
-                .into(contenedor_imagenSplash)
-        } else {
-            Glide.with(this)
-                .load(R.drawable.marvel_png)
-                .into(contenedor_imagenSplash)
-        }
+        Glide.with(this)
+            .load(R.drawable.marvel_gif)
+            .diskCacheStrategy(
+                DiskCacheStrategy.RESOURCE
+            )
+            .into(contenedor_imagenSplash)
+
 
         Timer().schedule(object : TimerTask() {
             override fun run() {
-                launchLoginOrHome()
+                activity?.runOnUiThread {
+                    kotlin.run {
+                        launchLoginOrHome()
+                    }
+                }
             }
         }, 3000)
     }

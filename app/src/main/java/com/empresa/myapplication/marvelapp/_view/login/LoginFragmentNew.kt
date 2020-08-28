@@ -112,6 +112,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
         }
 
         loginFacebook_button_loginFragment.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             // ESCONDER EL TECLADO
             loginViewModel.hideKeyboard(requireContext())
 
@@ -126,6 +127,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
     }
 
     fun validateData(): Boolean {
+        progressBar.visibility = View.VISIBLE
         if (usuario_textImputLayout_activityLogin.editText?.text
                 .toString()
                 .toLowerCase()
@@ -133,6 +135,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
                 .isEmpty()
         ) {
             usuario_textImputLayout_activityLogin.error = "Este campo no debe estar vacío."
+            progressBar.visibility = View.GONE
             return false
         }
         if (contraseña_textImputLayout_activityLogin.editText?.text
@@ -142,6 +145,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
                 .isEmpty()
         ) {
             contraseña_textImputLayout_activityLogin.error = "Este campo no debe estar vacío."
+            progressBar.visibility = View.GONE
             return false
         }
         contraseña_textImputLayout_activityLogin.error = null
@@ -231,7 +235,6 @@ class LoginFragmentNew : Fragment(), BasicMethods {
     }
 
     fun goHome(email: String, provider: ProviderType) {
-        progressBar.visibility = View.GONE
         loginViewModel.hideKeyboard(requireContext())
         loginViewModel.crearDatabase(requireActivity().application)
         saveStatusLogin(getString(R.string.logueado))
@@ -240,10 +243,10 @@ class LoginFragmentNew : Fragment(), BasicMethods {
         bundle.putString("email", email)
         bundle.putString("provider", provider.name)
         findNavController().navigate(R.id.action_loginFragmentNew_to_viewPagerFragment, bundle)
+        progressBar.visibility = View.GONE
     }
 
     private fun saveStatusLogin(status: String) {
-        progressBar.visibility = View.VISIBLE
         val sharedPref = activity?.getSharedPreferences(
             getString(R.string.preferencias), Context.MODE_PRIVATE
         )
@@ -253,9 +256,4 @@ class LoginFragmentNew : Fragment(), BasicMethods {
             commit()
         }
     }
-
-    fun sendApplication() : Application {
-        return (activity as AppCompatActivity)!!.application
-    }
-
 }
