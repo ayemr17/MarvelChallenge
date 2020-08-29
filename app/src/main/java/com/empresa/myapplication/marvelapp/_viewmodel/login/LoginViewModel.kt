@@ -52,6 +52,9 @@ class LoginViewModel : ViewModel() {
         if (mensaje.contains("An account already exists whit the same email address but different sign-in credentials")) {
             mensajeEmit = "La cuenta ya esta registrada pero con otras credenciales."
         }
+        if (mensajeEmit == "") {
+            mensajeEmit = mensaje
+        }
 
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Error")
