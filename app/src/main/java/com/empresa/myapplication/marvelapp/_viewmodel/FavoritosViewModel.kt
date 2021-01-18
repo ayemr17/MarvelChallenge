@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class FavoritosViewModel(private val repoFavoritos : FavoritRepositoryInter) : ViewModel()  {
 
     val favoritosList = liveData(Dispatchers.IO) {
-        emit(Resource.Loafing())
+        emit(Resource.Loading())
         try {
             emit(repoFavoritos.getAllFavoritos())
         } catch (e : Exception) {

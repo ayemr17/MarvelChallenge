@@ -10,7 +10,7 @@ import com.empresa.myapplication.marvelapp._model.repository.personajes.Personaj
  * Created by Ayelen Merigo on 25/8/2020.
  */
 
-class EventosVMFactory(private val repoEvento: EventosRepositoryImpl) : ViewModelProvider.Factory {
+class EventosVMFactory(private val repoEvento: EventosRepositoryInter) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(EventosRepositoryInter::class.java).newInstance(repoEvento)
     }

@@ -1,9 +1,7 @@
 package com.empresa.myapplication.marvelapp
 
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,8 +22,6 @@ import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.FavoritosViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp.vo.Resource
-import com.facebook.login.LoginManager
-import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import kotlinx.android.synthetic.main.fragment_favoritos.*
 
@@ -69,7 +65,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
     override fun initObservables() {
         favoritosViewModel.favoritosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
-                is Resource.Loafing -> {
+                is Resource.Loading -> {
                     progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {

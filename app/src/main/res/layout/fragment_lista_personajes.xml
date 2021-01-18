@@ -1,70 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/contenedor_sinseñal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/sinConexion_imageView_personajes"
-            android:layout_width="200dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contenedor_sinseñal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/siConexion_textView_personajes"
+            <ImageView
+                android:id="@+id/sinConexion_imageView_personajes"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/siConexion_textView_personajes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/dino_sin_conexion_gif" />
+
+            <TextView
+                android:id="@+id/siConexion_textView_personajes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="SIN SEÑAL DE INTERNET"
+                android:textAlignment="center"
+                android:textSize="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:elevation="1dp"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaPj_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/dino_sin_conexion_gif" />
-
-        <TextView
-            android:id="@+id/siConexion_textView_personajes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/roboto_black"
-            android:text="SIN SEÑAL DE INTERNET"
-            android:textAlignment="center"
-            android:textSize="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            tools:itemCount="15"
+            tools:listitem="@layout/item_recyclerview_personajes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:background="@color/colorWhite"
-        android:elevation="1dp"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listaPj_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="15"
-        tools:listitem="@layout/item_recyclerview_personajes" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

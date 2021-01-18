@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -26,6 +27,7 @@ import com.empresa.myapplication.marvelapp._viewmodel.FavoritosViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.PersonajeVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.personajes.PersonajesViewModel
+import com.empresa.myapplication.marvelapp.databinding.FragmentListaPersonajesBinding
 import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.android.synthetic.main.fragment_lista_personajes.*
 
@@ -54,8 +56,12 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val binding = DataBindingUtil.inflate<FragmentListaPersonajesBinding>(inflater,
+            R.layout.fragment_lista_personajes,container,false)
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_personajes, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,28 +78,28 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
     override fun initObservables() {
         // escuchamos el livedata del viewmodel
         // cargamos recycker con la lista entera de personajes que devuelve la api o mostramos error por pantalla con toast
-        personajesViewModel.personajesList.observe(viewLifecycleOwner, Observer { result ->
-            when (result) {
-                is Resource.Loafing -> {
+        personajesViewModel.charactersList.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Loading<*> -> {
                     progressBar.visibility = View.VISIBLE
                 }
-                is Resource.Success -> {
+                is Resource.Success<*> -> {
                     progressBar.visibility = View.GONE
                     listaPj_recyclerView.adapter =
                         RecyclerViewListaPersonajesAdapter(
                             requireContext(),
-                            result.data,
+                            it.data as List<Result>,
                             this,
                             this
                         )
                 }
-                is Resource.Failure -> {
+                is Resource.Failure<*> -> {
                     progressBar.visibility = View.GONE
                     listaPj_recyclerView.visibility = View.GONE
                     contenedor_sinseñal.visibility = View.VISIBLE
                     Toast.makeText(
                         requireContext(),
-                        "Hubo un error al traer los datos: ${result.exception}",
+                        "Hubo un error al traer los datos: ${it.exception}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -102,6 +108,7 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
     }
 
     override fun init() {
+        personajesViewModel.getCharacters()
         setupRecyclerView()
     }
 

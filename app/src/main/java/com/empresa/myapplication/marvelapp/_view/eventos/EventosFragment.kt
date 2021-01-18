@@ -55,17 +55,18 @@ class EventosFragment : Fragment(), BasicMethods,
         // escuchamos el livedata del viewModel para traer datos de la API
         eventosViewModel.eventosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
-                is Resource.Loafing -> {
+                is Resource.Loading<*> -> {
                     progressBar.visibility = View.VISIBLE
                 }
-                is Resource.Success -> {
+                is Resource.Success<*> -> {
                     progressBar.visibility = View.GONE
 
                     //cargamos el adapter para mostrar la lista de eventos
                     listEventos_recyclerView.adapter =
-                        RecyclerViewListaEventosAdapter(requireContext(), result.data, this)
+                        RecyclerViewListaEventosAdapter(requireContext(),
+                            result.data as List<ResultEventos>, this)
                 }
-                is Resource.Failure -> {
+                is Resource.Failure<*> -> {
                     progressBar.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
@@ -78,6 +79,7 @@ class EventosFragment : Fragment(), BasicMethods,
     }
 
     override fun init() {
+        eventosViewModel.getEvents()
         setupRecyclerView()
     }
 
@@ -88,7 +90,6 @@ class EventosFragment : Fragment(), BasicMethods,
     }
 
     override fun onEventoClick(evento: ResultEventos, view : View) {
-        // cargamos la lista con los comics que pertenesen al evento seleccionado y desplegamos el item
 
         view.listComics_recyclerView_eventos.adapter =
             RecyclerViewListComicsAdapter(requireContext(), evento.comics?.items!!)

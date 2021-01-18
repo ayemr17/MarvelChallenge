@@ -3,6 +3,7 @@ package com.empresa.myapplication.marvelapp
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.empresa.myapplication.marvelapp._view.base.BaseActivity
@@ -10,14 +11,18 @@ import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._view.home.ViewPagerFragment
 import com.empresa.myapplication.marvelapp._view.login.LoginFragmentNew
 import com.empresa.myapplication.marvelapp._view.splash.SplashFragment
+import com.empresa.myapplication.marvelapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_custom.*
 
 class MainActivity : BaseActivity(), BasicMethods {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = DataBindingUtil.setContentView (this, R.layout.activity_main)
 
          val toolbar : Toolbar = findViewById(R.id.ActivityMainToolbar)
         setSupportActionBar(toolbar)
@@ -27,17 +32,14 @@ class MainActivity : BaseActivity(), BasicMethods {
     }
 
     override fun initObservables() {
-
     }
 
     override fun init() {
-
     }
 
     override fun initListeners() {
         signout_imageView_appbar.setOnClickListener {
             //signOut()
-
             Toast.makeText(this, "Aca nos deslogueamos", Toast.LENGTH_SHORT).show()
         }
     }
