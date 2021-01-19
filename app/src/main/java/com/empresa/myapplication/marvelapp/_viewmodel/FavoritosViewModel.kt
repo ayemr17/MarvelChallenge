@@ -23,6 +23,7 @@ class FavoritosViewModel(private val repoFavoritos : FavoritRepositoryInter) : V
             emit(Resource.Failure(e))
         }
     }
+    
 
     fun insertFavorito(favorito: FavoritosEntity) {
         viewModelScope.launch {
