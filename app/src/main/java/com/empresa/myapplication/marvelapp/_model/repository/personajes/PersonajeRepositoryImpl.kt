@@ -7,13 +7,20 @@ import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._model.repository.eventos.EventosRepositoryInter
 import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by Ayelen Merigo on 24/8/2020.
  */
 
 class PersonajeRepositoryImpl(private val dataSourceApi: DataSourceApi) : PersonajeRepositoryInter,
-    EventosRepositoryInter {
+    EventosRepositoryInter, CoroutineScope {
+
+    // creamos un coroutineScope para poder crear corrutinas mediante este y no utilizando el GlobalScope o CoroutineScope propiamente dichos
+    // de esta forma podemos llamar directamente a la funciona launch o async sin tener que mencionarla cada vez que querramos iniciar una corrutina
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.IO
 
     override suspend fun getEventsForApi(): Resource<List<ResultEventos>> {
         return dataSourceApi.getAllEvents()
@@ -23,7 +30,17 @@ class PersonajeRepositoryImpl(private val dataSourceApi: DataSourceApi) : Person
         return dataSourceApi.getAllCharacters()
     }
 
-    override fun getCharactersAndEventsAsync() = CoroutineScope(Dispatchers.IO).async {
+    override fun getCharactersAndEventsAsync() = async {
+        val charactersAsync = async { getCharactersForApi() }
+        val eventsAsync = async { getEventsForApi() }
+
+        return@async ChartEventModel(
+            charactersAsync.await(),
+            eventsAsync.await())
+    }
+
+    //Si no hubiesemos creado la variable armando nuestro scope, tendriamos que haber explicitado en la funcion que contexto se iba a utilizar y que scope
+    fun getCharactersAndEventsAsync2() = CoroutineScope(Dispatchers.Main).async {
         val charactersAsync = async(Dispatchers.IO) { getCharactersForApi() }
         val eventsAsync = async(Dispatchers.IO) { getEventsForApi() }
 
@@ -33,7 +50,9 @@ class PersonajeRepositoryImpl(private val dataSourceApi: DataSourceApi) : Person
         )
     }
 
-    override fun getCharactersAndEvents(): ChartEventModel =
+    // de esta forma no se debe hacer ya que el runBlocking lo que hace es presisamente bloquear el hijo donde se lo esta llamando hasta obtener el resultado
+    // es decir que anula el proposito de usar corrutinas
+    fun getCharactersAndEvents(): ChartEventModel =
         runBlocking {
             getCharactersAndEventsAsync().await()
         }

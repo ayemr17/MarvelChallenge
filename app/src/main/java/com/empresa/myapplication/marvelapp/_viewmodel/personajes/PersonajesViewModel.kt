@@ -11,8 +11,7 @@ import com.empresa.myapplication.marvelapp._model.repository.personajes.Personaj
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesAdapter
 import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.android.synthetic.main.fragment_lista_personajes.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 /**
  * Created by Ayelen Merigo on 24/8/2020.
@@ -23,9 +22,10 @@ class PersonajesViewModel(private val repoPersonaje: PersonajeRepositoryInter) :
     private val _charactersList : MutableLiveData<Resource<List<Result>>> = MutableLiveData()
     val charactersList: LiveData<Resource<List<Result>>> get() = _charactersList
 
-    private var listCharacters = repoPersonaje.getCharactersAndEvents()
-
     fun getCharacters() {
+        CoroutineScope(Dispatchers.IO).launch {
+            var listCharacters = repoPersonaje.getCharactersAndEventsAsync().await()
             _charactersList.postValue(listCharacters.charactersList)
+        }
     }
 }

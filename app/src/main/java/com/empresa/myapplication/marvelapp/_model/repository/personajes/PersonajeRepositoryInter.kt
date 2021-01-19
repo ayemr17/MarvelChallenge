@@ -15,7 +15,5 @@ import kotlinx.coroutines.Job
 interface PersonajeRepositoryInter {
 
     suspend fun getCharactersForApi() : Resource<List<Result>>
-    fun getCharactersAndEventsAsync(): Deferred<ChartEventModel>
-    fun getCharactersAndEvents(): ChartEventModel
-
+    fun getCharactersAndEventsAsync() : Deferred<ChartEventModel>
 }

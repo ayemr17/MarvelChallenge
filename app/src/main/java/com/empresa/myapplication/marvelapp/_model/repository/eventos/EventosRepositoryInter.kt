@@ -14,8 +14,6 @@ import kotlinx.coroutines.Deferred
 interface EventosRepositoryInter {
 
     suspend fun getEventsForApi() : Resource<List<ResultEventos>>
-    suspend fun getCharactersForApi(): Resource<List<Result>>
-    fun getCharactersAndEventsAsync(): Deferred<ChartEventModel>
-    fun getCharactersAndEvents(): ChartEventModel
+    fun getCharactersAndEventsAsync() : Deferred<ChartEventModel>
 
 }
