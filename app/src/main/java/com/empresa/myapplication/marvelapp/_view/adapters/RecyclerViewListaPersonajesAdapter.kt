@@ -11,7 +11,6 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp._model.local.FavoritosEntity
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._view.adapters.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_recyclerview_personajes.view.*

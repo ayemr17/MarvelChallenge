@@ -15,11 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.empresa.myapplication.marvelapp._model.local.AppDatabase
 import com.empresa.myapplication.marvelapp._model.local.DataSourceRoom
-import com.empresa.myapplication.marvelapp._model.local.FavoritosEntity
-import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoritRepositoryImpl
+import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
+import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesROOMAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
-import com.empresa.myapplication.marvelapp._viewmodel.FavoritosViewModel
+import com.empresa.myapplication.marvelapp._viewmodel.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.android.synthetic.main.app_bar_custom.*
@@ -32,9 +32,9 @@ class FavoritosFragment : Fragment(), BasicMethods,
     val STATUS_LOGIN = "status_login"
 
     // inyectamos las dependencias necesarias
-    private val favoritosViewModel by viewModels<FavoritosViewModel> {
+    private val favoritosViewModel by viewModels<FavoritesViewModel> {
         FavoritosVMFactory(
-            FavoritRepositoryImpl(
+            FavoriteRepositoryImpl(
                 DataSourceRoom(AppDatabase.getInstance(requireActivity().applicationContext))
             )
         )
@@ -102,6 +102,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
     }
 
     override fun init() {
+        favoritosViewModel.getFavoritesList()
         setupRecyclerView()
     }
 
@@ -111,19 +112,19 @@ class FavoritosFragment : Fragment(), BasicMethods,
         }
     }
 
-    override fun onPersonajeClick(pj: FavoritosEntity) {}
+    override fun onPersonajeClick(pj: FavoritesEntity) {}
 
     private fun setupRecyclerView() {
         favoritos_recyclerView_favoritosFragment.layoutManager =
             LinearLayoutManager(requireContext())
     }
 
-    override fun onLongClickPersonajeListener(pj: FavoritosEntity, position: Int): Boolean {
+    override fun onLongClickPersonajeListener(pj: FavoritesEntity, position: Int): Boolean {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Eliminar")
         builder.setMessage("Eliminará a este personaje de la lista de favoritos.")
         builder.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
-            favoritosViewModel.deleteFavorito(pj)
+            favoritosViewModel.deleteFavorite(pj)
             favoritos_recyclerView_favoritosFragment.adapter!!.notifyItemRemoved(position)
             favoritos_recyclerView_favoritosFragment.adapter?.notifyDataSetChanged()
             findNavController().navigate(R.id.favoritosFragment)

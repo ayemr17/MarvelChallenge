@@ -10,16 +10,16 @@ import kotlinx.coroutines.withContext
 
 class DataSourceRoom(private val appDatabase: AppDatabase) {
 
-    suspend fun saveFavoritos(favorito : FavoritosEntity) =
+    suspend fun saveFavorite(favorito : FavoritesEntity) =
         withContext(Dispatchers.IO) {
             appDatabase.favoritosDao().insertFavorito(favorito)
         }
 
-    suspend fun getFavoritos() : Resource<List<FavoritosEntity>> {
+    suspend fun getFavorites() : Resource<List<FavoritesEntity>> {
         return Resource.Success(appDatabase.favoritosDao().getAllFavoritos())
     }
 
-    suspend fun deleteFavorito(favorito: FavoritosEntity) =
+    suspend fun deleteFavorite(favorito: FavoritesEntity) =
         withContext(Dispatchers.IO) {
             appDatabase.favoritosDao().deleteFavorito(favorito)
         }

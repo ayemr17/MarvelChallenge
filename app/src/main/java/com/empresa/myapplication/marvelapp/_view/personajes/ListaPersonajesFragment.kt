@@ -16,14 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp._model.local.AppDatabase
 import com.empresa.myapplication.marvelapp._model.local.DataSourceRoom
-import com.empresa.myapplication.marvelapp._model.local.FavoritosEntity
+import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
 import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
-import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoritRepositoryImpl
+import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
 import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
-import com.empresa.myapplication.marvelapp._viewmodel.FavoritosViewModel
+import com.empresa.myapplication.marvelapp._viewmodel.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.PersonajeVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.personajes.PersonajesViewModel
@@ -44,9 +44,9 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
         )
     }
 
-    private val favoritosViewModel by viewModels<FavoritosViewModel> {
+    private val favoritosViewModel by viewModels<FavoritesViewModel> {
         FavoritosVMFactory(
-            FavoritRepositoryImpl(
+            FavoriteRepositoryImpl(
                 DataSourceRoom(AppDatabase.getInstance(requireActivity().applicationContext))
             )
         )
@@ -135,8 +135,8 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
         builder.setTitle("Agregar")
         builder.setMessage("Agregará este personaje a la lista de favoritos.")
         builder.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
-            favoritosViewModel.insertFavorito(
-                FavoritosEntity(pj.id!!.toInt(), pj.name.toString(), pj.description.toString(),
+            favoritosViewModel.insertFavorite(
+                FavoritesEntity(pj.id!!.toInt(), pj.name.toString(), pj.description.toString(),
                 pj.thumbnail?.path + "." + (pj.thumbnail?.extension)
                 )
             )

@@ -1,7 +1,8 @@
 package com.empresa.myapplication.marvelapp._model.repository.favoritos
 
-import com.empresa.myapplication.marvelapp._model.local.FavoritosEntity
+import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
 import com.empresa.myapplication.marvelapp.vo.Resource
+import kotlinx.coroutines.channels.ReceiveChannel
 
 /**
  * Created by Ayelen Merigo on 27/8/2020.
@@ -9,10 +10,12 @@ import com.empresa.myapplication.marvelapp.vo.Resource
 
 interface FavoritRepositoryInter {
 
-    suspend fun saveFavoritos(favorito : FavoritosEntity)
+    suspend fun saveFavorite(favorito : FavoritesEntity)
 
-    suspend fun getAllFavoritos() : Resource<List<FavoritosEntity>>
+    suspend fun getAllFavoritos() : Resource<List<FavoritesEntity>>
 
-    suspend fun deleteFavorito(favorito : FavoritosEntity)
+    suspend fun deleteFavorite(favorito : FavoritesEntity)
+
+    fun getCharactersProduce(): ReceiveChannel<FavoritesEntity>
 
 }

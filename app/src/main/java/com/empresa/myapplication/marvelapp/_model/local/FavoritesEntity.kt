@@ -10,7 +10,7 @@ import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Item
  */
 
 @Entity(tableName = "_FAVORITOS")
-data class FavoritosEntity(
+data class FavoritesEntity(
     @PrimaryKey
     val idPersonaje : Int,
     @ColumnInfo(name = "nombrePersonaje")

@@ -1,14 +1,11 @@
 package com.empresa.myapplication.marvelapp._view.personajes
 
-import android.content.Context
 import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -23,19 +20,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp._model.local.AppDatabase
 import com.empresa.myapplication.marvelapp._model.local.DataSourceRoom
-import com.empresa.myapplication.marvelapp._model.local.FavoritosEntity
-import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
+import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
-import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoritRepositoryImpl
-import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
+import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaComicsAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
-import com.empresa.myapplication.marvelapp._viewmodel.FavoritosViewModel
+import com.empresa.myapplication.marvelapp._viewmodel.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
-import com.empresa.myapplication.marvelapp._viewmodel.factorys.PersonajeVMFactory
-import com.empresa.myapplication.marvelapp._viewmodel.personajes.PersonajesViewModel
-import com.facebook.login.LoginManager
-import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import kotlinx.android.synthetic.main.fragment_detalle_personaje.*
 
@@ -44,9 +35,9 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
     val STATUS_LOGIN = "status_login"
     private lateinit var pj: Result
 
-    private val favoritosViewModel by viewModels<FavoritosViewModel> {
+    private val favoritosViewModel by viewModels<FavoritesViewModel> {
         FavoritosVMFactory(
-            FavoritRepositoryImpl(
+            FavoriteRepositoryImpl(
                 DataSourceRoom(AppDatabase.getInstance(requireActivity().applicationContext))
             )
         )
@@ -117,8 +108,8 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
             builder.setTitle("Agregar")
             builder.setMessage("Agregará este personaje a la lista de favoritos.")
             builder.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
-                favoritosViewModel.insertFavorito(
-                    FavoritosEntity(pj.id!!.toInt(), pj.name.toString(), pj.description.toString(),
+                favoritosViewModel.insertFavorite(
+                    FavoritesEntity(pj.id!!.toInt(), pj.name.toString(), pj.description.toString(),
                         pj.thumbnail?.path + "." + (pj.thumbnail?.extension)
                     )
                 )

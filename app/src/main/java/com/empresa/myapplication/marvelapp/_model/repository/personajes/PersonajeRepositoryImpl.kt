@@ -36,7 +36,8 @@ class PersonajeRepositoryImpl(private val dataSourceApi: DataSourceApi) : Person
 
         return@async ChartEventModel(
             charactersAsync.await(),
-            eventsAsync.await())
+            eventsAsync.await()
+        )
     }
 
     //Si no hubiesemos creado la variable armando nuestro scope, tendriamos que haber explicitado en la funcion que contexto se iba a utilizar y que scope
@@ -56,4 +57,25 @@ class PersonajeRepositoryImpl(private val dataSourceApi: DataSourceApi) : Person
         runBlocking {
             getCharactersAndEventsAsync().await()
         }
+
+
+    /*fun getCharactersAndEventsAsync() =
+        CoroutineScope(Dispatchers.Main).launch {
+            ......
+    }
+
+    fun getCharactersAndEventsAsync() =
+        CoroutineScope(Dispatchers.IO).launch {
+            .....
+        }
+
+    fun getCharactersAndEventsAsync() =
+        CoroutineScope(Dispatchers.Default).launch {
+            .....
+        }
+
+    fun getCharactersAndEventsAsync() =
+        CoroutineScope(Dispatchers.Unconfined).launch {
+            .....
+        }*/
 }
