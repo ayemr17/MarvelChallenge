@@ -21,15 +21,18 @@ import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPerso
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
+import com.empresa.myapplication.marvelapp.databinding.FragmentFavoritosBinding
 import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.android.synthetic.main.app_bar_custom.*
-import kotlinx.android.synthetic.main.fragment_favoritos.*
+import java.util.ArrayList
 
 class FavoritosFragment : Fragment(), BasicMethods,
     RecyclerViewListaPersonajesROOMAdapter.OnPersonajeClickListener,
     RecyclerViewListaPersonajesROOMAdapter.OnLongPersonajeClickListener {
 
     val STATUS_LOGIN = "status_login"
+    private lateinit var binding : FragmentFavoritosBinding
+    private var favoritesList = ArrayList<FavoritesEntity>()
 
     // inyectamos las dependencias necesarias
     private val favoritosViewModel by viewModels<FavoritesViewModel> {
@@ -44,8 +47,17 @@ class FavoritosFragment : Fragment(), BasicMethods,
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favoritos, container, false)
+        binding = FragmentFavoritosBinding.inflate(inflater, container, false)
+
+        binding.viewModel = favoritosViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.adapter = RecyclerViewListaPersonajesROOMAdapter(
+            requireContext(),
+            favoritesList,
+            this,
+            this
+        )
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,30 +78,30 @@ class FavoritosFragment : Fragment(), BasicMethods,
         favoritosViewModel.favoritosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
-                    progressBar.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
-                    progressBar.visibility = View.GONE
-                    favoritos_recyclerView_favoritosFragment.adapter =
+                    binding.progressBar.visibility = View.GONE
+                    binding.favoritosRecyclerViewFavoritosFragment.adapter =
                         RecyclerViewListaPersonajesROOMAdapter(
                             requireContext(),
                             result.data,
                             this,
                             this
                         )
-                    favoritos_recyclerView_favoritosFragment.adapter?.notifyDataSetChanged()
+                    binding.favoritosRecyclerViewFavoritosFragment.adapter?.notifyDataSetChanged()
 
                     if (result.data.size < 1) {
-                        sinFavofitos_textView.visibility = View.VISIBLE
-                        favoritos_recyclerView_favoritosFragment.visibility = View.GONE
+                        binding.sinFavofitosTextView.visibility = View.VISIBLE
+                        binding.favoritosRecyclerViewFavoritosFragment.visibility = View.GONE
                     } else {
-                        sinFavofitos_textView.visibility = View.GONE
-                        favoritos_recyclerView_favoritosFragment.visibility = View.VISIBLE
+                        binding.sinFavofitosTextView.visibility = View.GONE
+                        binding.favoritosRecyclerViewFavoritosFragment.visibility = View.VISIBLE
                     }
                 }
                 is Resource.Failure -> {
-                    progressBar.visibility = View.GONE
-                    favoritos_recyclerView_favoritosFragment.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                    binding.favoritosRecyclerViewFavoritosFragment.visibility = View.GONE
                     //contenedor_sinseñal.visibility = View.VISIBLE
                     Toast.makeText(
                         requireContext(),
@@ -115,7 +127,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
     override fun onPersonajeClick(pj: FavoritesEntity) {}
 
     private fun setupRecyclerView() {
-        favoritos_recyclerView_favoritosFragment.layoutManager =
+        binding.favoritosRecyclerViewFavoritosFragment.layoutManager =
             LinearLayoutManager(requireContext())
     }
 
@@ -125,8 +137,8 @@ class FavoritosFragment : Fragment(), BasicMethods,
         builder.setMessage("Eliminará a este personaje de la lista de favoritos.")
         builder.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
             favoritosViewModel.deleteFavorite(pj)
-            favoritos_recyclerView_favoritosFragment.adapter!!.notifyItemRemoved(position)
-            favoritos_recyclerView_favoritosFragment.adapter?.notifyDataSetChanged()
+            binding.favoritosRecyclerViewFavoritosFragment.adapter!!.notifyItemRemoved(position)
+            binding.favoritosRecyclerViewFavoritosFragment.adapter?.notifyDataSetChanged()
             findNavController().navigate(R.id.favoritosFragment)
         })
 

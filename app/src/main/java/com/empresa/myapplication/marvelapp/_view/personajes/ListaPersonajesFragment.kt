@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -29,11 +28,13 @@ import com.empresa.myapplication.marvelapp._viewmodel.factorys.PersonajeVMFactor
 import com.empresa.myapplication.marvelapp._viewmodel.personajes.PersonajesViewModel
 import com.empresa.myapplication.marvelapp.databinding.FragmentListaPersonajesBinding
 import com.empresa.myapplication.marvelapp.vo.Resource
-import kotlinx.android.synthetic.main.fragment_lista_personajes.*
 
 class ListaPersonajesFragment : Fragment(), BasicMethods,
     RecyclerViewListaPersonajesAdapter.OnPersonajeClickListener,
     RecyclerViewListaPersonajesAdapter.OnLongPersonajeClickListener {
+
+    private var _binding: FragmentListaPersonajesBinding? = null
+    private val binding get() = _binding!!
 
     // inyectamos las dependencias necesarias
     private val personajesViewModel by viewModels<PersonajesViewModel> {
@@ -56,19 +57,15 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val binding = DataBindingUtil.inflate<FragmentListaPersonajesBinding>(inflater,
-            R.layout.fragment_lista_personajes,container,false)
-
-        // Inflate the layout for this fragment
+        _binding = FragmentListaPersonajesBinding.inflate(inflater, container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listaPj_recyclerView.visibility = View.VISIBLE
-        contenedor_sinseñal.visibility = View.GONE
+        binding.listaPjRecyclerView.visibility = View.VISIBLE
+        binding.contenedorSinseñal.visibility = View.GONE
 
         initObservables()
         init()
@@ -81,11 +78,11 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
         personajesViewModel.charactersList.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Loading<*> -> {
-                    progressBar.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success<*> -> {
-                    progressBar.visibility = View.GONE
-                    listaPj_recyclerView.adapter =
+                    binding.progressBar.visibility = View.GONE
+                    binding.listaPjRecyclerView.adapter =
                         RecyclerViewListaPersonajesAdapter(
                             requireContext(),
                             it.data as List<Result>,
@@ -94,9 +91,9 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
                         )
                 }
                 is Resource.Failure<*> -> {
-                    progressBar.visibility = View.GONE
-                    listaPj_recyclerView.visibility = View.GONE
-                    contenedor_sinseñal.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    binding.listaPjRecyclerView.visibility = View.GONE
+                    binding.contenedorSinseñal.visibility = View.VISIBLE
                     Toast.makeText(
                         requireContext(),
                         "Hubo un error al traer los datos: ${it.exception}",
@@ -115,7 +112,7 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
     override fun initListeners() {}
 
     private fun setupRecyclerView() {
-        listaPj_recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.listaPjRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
     }
@@ -145,5 +142,10 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
         val dialog = builder.create()
         dialog.show()
         return true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

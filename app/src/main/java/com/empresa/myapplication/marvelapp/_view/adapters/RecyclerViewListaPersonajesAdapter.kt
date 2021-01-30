@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._view.adapters.base.BaseViewHolder
+import com.empresa.myapplication.marvelapp.databinding.ItemRecyclerviewPersonajesBinding
 import kotlinx.android.synthetic.main.item_recyclerview_personajes.view.*
 
 /**
@@ -27,6 +28,8 @@ class RecyclerViewListaPersonajesAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+        /*val binding = ItemRecyclerviewPersonajesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PersonajeViewHolder(binding.root)*/
         return PersonajeViewHolder(
             LayoutInflater.from(context)
                 .inflate(R.layout.item_recyclerview_personajes, parent, false)
@@ -43,7 +46,10 @@ class RecyclerViewListaPersonajesAdapter(
         return personajesList.size
     }
 
-    inner class PersonajeViewHolder(itemView: View) : BaseViewHolder<Result>(itemView) {
+    inner class PersonajeViewHolder(view: View) : BaseViewHolder<Result>(view) {
+
+        private val binding = ItemRecyclerviewPersonajesBinding.bind(view)
+
         override fun bind(item: Result, position: Int) {
 
             var options: RequestOptions = RequestOptions()
@@ -56,19 +62,21 @@ class RecyclerViewListaPersonajesAdapter(
                 .apply(options)
                 .into(itemView.personaje_imageView_itemRecycler)
 
-            itemView.nombrePJ_textView_itemRecycler.text = item.name
-            if (item.description.isNullOrEmpty()) {
-                itemView.descripcionPJ_textView_itemRecycler.text = context.getString(R.string.sin_descrip)
-            } else {
-                itemView.descripcionPJ_textView_itemRecycler.text = item.description
-            }
+            with(binding) {
+                itemView.nombrePJ_textView_itemRecycler.text = item.name
+                if (item.description.isNullOrEmpty()) {
+                    itemView.descripcionPJ_textView_itemRecycler.text = context.getString(R.string.sin_descrip)
+                } else {
+                    itemView.descripcionPJ_textView_itemRecycler.text = item.description
+                }
 
-            itemView.setOnClickListener {
-                itemClickListener.onPersonajeClick(item)
-            }
+                itemView.setOnClickListener {
+                    itemClickListener.onPersonajeClick(item)
+                }
 
-            itemView.setOnLongClickListener {
-                return@setOnLongClickListener itemLongClickListener.onLongClickPersonajeListener(item)
+                itemView.setOnLongClickListener {
+                    return@setOnLongClickListener itemLongClickListener.onLongClickPersonajeListener(item)
+                }
             }
         }
     }
