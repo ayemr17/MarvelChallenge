@@ -30,19 +30,25 @@ class FavoriteRepositoryImpl(private val dataSource: DataSourceRoom) : FavoritRe
         return dataSource.getFavorites()
     }
 
+    override suspend fun getAllFavorites() : List<FavoritesEntity> {
+        return dataSource.getAllFavorites()
+    }
+
     override suspend fun deleteFavorite(favorite: FavoritesEntity) {
         dataSource.deleteFavorite(favorite)
     }
 
     // ejemplo de algo que se podria hacer con el builder Produce de coroutines
-    var favoritesCharacters = listOf(
+/*    var favoritesCharacters = listOf(
         FavoritesEntity(1, "Batman", "Murcielago", ""),
         FavoritesEntity(2, "Chico Percebe", "Bob Esponja", ""),
         FavoritesEntity(3, "Iron Man", "Team Ironman", ""),
         FavoritesEntity(4, "Groot", "Arbolito", "")
-    )
+    )*/
 
     override fun getCharactersProduce(): ReceiveChannel<FavoritesEntity> = produce {
+        var favoritesCharacters = getAllFavorites()
+
         favoritesCharacters.forEach { send(it) }
     }
 }

@@ -1,6 +1,5 @@
 package com.empresa.myapplication.marvelapp._view.login
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.login.LoginViewModel
+import com.empresa.myapplication.marvelapp.databinding.FragmentLoginNewBinding
 import com.empresa.myapplication.marvelapp.util.ProviderType
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -32,6 +32,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
     private lateinit var loginViewModel: LoginViewModel
 
     val STATUS_LOGIN = "status_login"
+    private lateinit var binding: FragmentLoginNewBinding
     private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreateView(
@@ -39,7 +40,9 @@ class LoginFragmentNew : Fragment(), BasicMethods {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login_new, container, false)
+
+        binding = FragmentLoginNewBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,7 +75,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
             }
         })
 
-        contraseña_textImputLayout_activityLogin.editText?.addTextChangedListener(object :
+        password_textImputLayout_activityLogin.editText?.addTextChangedListener(object :
             TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
 
@@ -80,7 +83,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty()) {
-                    contraseña_textImputLayout_activityLogin.isErrorEnabled = false
+                    password_textImputLayout_activityLogin.isErrorEnabled = false
                 }
             }
         })
@@ -93,7 +96,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
                 ingresarConEmail(
                     0,
                     usuario_textImputLayout_activityLogin.textInputEditText3.text.toString(),
-                    contraseña_textImputLayout_activityLogin.textInputEditText4.text.toString()
+                    password_textImputLayout_activityLogin.textInputEditText4.text.toString()
                 )
             }
         }
@@ -106,7 +109,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
                 ingresarConEmail(
                     1,
                     usuario_textImputLayout_activityLogin.textInputEditText3.text.toString(),
-                    contraseña_textImputLayout_activityLogin.textInputEditText4.text.toString()
+                    password_textImputLayout_activityLogin.textInputEditText4.text.toString()
                 )
             }
         }
@@ -121,7 +124,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
             ingresarConEmail(
                 2,
                 usuario_textImputLayout_activityLogin.textInputEditText3.text.toString(),
-                contraseña_textImputLayout_activityLogin.textInputEditText4.text.toString()
+                password_textImputLayout_activityLogin.textInputEditText4.text.toString()
             )
         }
     }
@@ -138,17 +141,17 @@ class LoginFragmentNew : Fragment(), BasicMethods {
             progressBar.visibility = View.GONE
             return false
         }
-        if (contraseña_textImputLayout_activityLogin.editText?.text
+        if (password_textImputLayout_activityLogin.editText?.text
                 .toString()
                 .toLowerCase()
                 .trim()
                 .isEmpty()
         ) {
-            contraseña_textImputLayout_activityLogin.error = "Este campo no debe estar vacío."
+            password_textImputLayout_activityLogin.error = "Este campo no debe estar vacío."
             progressBar.visibility = View.GONE
             return false
         }
-        contraseña_textImputLayout_activityLogin.error = null
+        password_textImputLayout_activityLogin.error = null
         return true
     }
 
@@ -166,7 +169,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
                         } else {
                             progressBar.visibility = View.GONE
                             usuario_textImputLayout_activityLogin.textInputEditText3.text = null
-                            contraseña_textImputLayout_activityLogin.textInputEditText4.text = null
+                            password_textImputLayout_activityLogin.textInputEditText4.text = null
                             loginViewModel.showAlert(requireContext(), it.exception?.message.toString())
                         }
                     }
@@ -183,7 +186,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
                         } else {
                             progressBar.visibility = View.GONE
                             usuario_textImputLayout_activityLogin.textInputEditText3.text = null
-                            contraseña_textImputLayout_activityLogin.textInputEditText4.text = null
+                            password_textImputLayout_activityLogin.textInputEditText4.text = null
 
                             loginViewModel.showAlert(requireContext(), it.exception?.message.toString())
                         }

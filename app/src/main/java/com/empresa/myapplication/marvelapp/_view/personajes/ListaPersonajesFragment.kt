@@ -22,7 +22,7 @@ import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteR
 import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
-import com.empresa.myapplication.marvelapp._viewmodel.FavoritesViewModel
+import com.empresa.myapplication.marvelapp._viewmodel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.PersonajeVMFactory
 import com.empresa.myapplication.marvelapp._viewmodel.personajes.PersonajesViewModel
@@ -65,7 +65,7 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
         super.onViewCreated(view, savedInstanceState)
 
         binding.listaPjRecyclerView.visibility = View.VISIBLE
-        binding.contenedorSinseñal.visibility = View.GONE
+        binding.noSignalContainer.visibility = View.GONE
 
         initObservables()
         init()
@@ -93,7 +93,7 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
                 is Resource.Failure<*> -> {
                     binding.progressBar.visibility = View.GONE
                     binding.listaPjRecyclerView.visibility = View.GONE
-                    binding.contenedorSinseñal.visibility = View.VISIBLE
+                    binding.noSignalContainer.visibility = View.VISIBLE
                     Toast.makeText(
                         requireContext(),
                         "Hubo un error al traer los datos: ${it.exception}",

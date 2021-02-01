@@ -18,4 +18,6 @@ interface FavoritRepositoryInter {
 
     fun getCharactersProduce(): ReceiveChannel<FavoritesEntity>
 
+    suspend fun getAllFavorites() : List<FavoritesEntity>
+
 }

@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,10 +19,9 @@ import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
 import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
 import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesROOMAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
-import com.empresa.myapplication.marvelapp._viewmodel.FavoritesViewModel
+import com.empresa.myapplication.marvelapp._viewmodel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp.databinding.FragmentFavoritosBinding
-import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import java.util.ArrayList
 
@@ -31,7 +30,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
     RecyclerViewListaPersonajesROOMAdapter.OnLongPersonajeClickListener {
 
     val STATUS_LOGIN = "status_login"
-    private lateinit var binding : FragmentFavoritosBinding
+    private lateinit var binding: FragmentFavoritosBinding
     private var favoritesList = ArrayList<FavoritesEntity>()
 
     // inyectamos las dependencias necesarias
@@ -47,16 +46,21 @@ class FavoritosFragment : Fragment(), BasicMethods,
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoritosBinding.inflate(inflater, container, false)
 
-        binding.viewModel = favoritosViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
+
+        binding =
+            FragmentFavoritosBinding.inflate(LayoutInflater.from(context), null, false)
+
+        //binding = FragmentFavoritosBinding.inflate(inflater, container, false)
+
+        //binding.viewModel = favoritosViewModel
+        /*binding.lifecycleOwner = viewLifecycleOwner
         binding.adapter = RecyclerViewListaPersonajesROOMAdapter(
             requireContext(),
             favoritesList,
             this,
             this
-        )
+        )*/
         return binding.root
     }
 
@@ -75,7 +79,28 @@ class FavoritosFragment : Fragment(), BasicMethods,
     }
 
     override fun initObservables() {
-        favoritosViewModel.favoritosList.observe(viewLifecycleOwner, Observer { result ->
+
+        favoritosViewModel.favoritesList.observe(viewLifecycleOwner, Observer { list ->
+            binding.progressBar.visibility = View.GONE
+            binding.favoritosRecyclerViewFavoritosFragment.adapter =
+                RecyclerViewListaPersonajesROOMAdapter(
+                    requireContext(),
+                    list,
+                    this,
+                    this
+                )
+            binding.favoritosRecyclerViewFavoritosFragment.adapter?.notifyDataSetChanged()
+
+            if (list.isEmpty()) {
+                binding.sinFavofitosTextView.visibility = View.VISIBLE
+                binding.favoritosRecyclerViewFavoritosFragment.visibility = View.GONE
+            } else {
+                binding.sinFavofitosTextView.visibility = View.GONE
+                binding.favoritosRecyclerViewFavoritosFragment.visibility = View.VISIBLE
+            }
+        })
+
+        /*favoritosViewModel.favoritosList.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -110,7 +135,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
                     ).show()
                 }
             }
-        })
+        })*/
     }
 
     override fun init() {

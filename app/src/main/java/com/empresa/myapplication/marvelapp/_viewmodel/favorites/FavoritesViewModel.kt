@@ -1,4 +1,4 @@
-package com.empresa.myapplication.marvelapp._viewmodel
+package com.empresa.myapplication.marvelapp._viewmodel.favorites
 
 import androidx.lifecycle.*
 import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
@@ -18,14 +18,14 @@ class FavoritesViewModel(private val favoriteRepository : FavoritRepositoryInter
     private val _favoritesList : MutableLiveData<List<FavoritesEntity>> = MutableLiveData()
     val favoritesList: LiveData<List<FavoritesEntity>> get() = _favoritesList
 
-    val favoritosList = liveData(Dispatchers.IO) {
+    /*val favoritosList = liveData(Dispatchers.IO) {
         emit(Resource.Loading())
         try {
             emit(favoriteRepository.getAllFavoritos())
         } catch (e : Exception) {
-            emit(Resource.Failure(e))
+            emit(Resource.Failure<>(e))
         }
-    }
+    }*/
 
     fun insertFavorite(favorite: FavoritesEntity) {
         viewModelScope.launch {

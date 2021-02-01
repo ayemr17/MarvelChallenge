@@ -19,6 +19,10 @@ class DataSourceRoom(private val appDatabase: AppDatabase) {
         return Resource.Success(appDatabase.favoritosDao().getAllFavoritos())
     }
 
+    suspend fun getAllFavorites() : List<FavoritesEntity> {
+        return appDatabase.favoritosDao().getAllFavoritos()
+    }
+
     suspend fun deleteFavorite(favorito: FavoritesEntity) =
         withContext(Dispatchers.IO) {
             appDatabase.favoritosDao().deleteFavorito(favorito)

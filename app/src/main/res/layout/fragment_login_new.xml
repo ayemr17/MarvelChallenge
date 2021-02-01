@@ -87,7 +87,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/contraseña_textImputLayout_activityLogin"
+                    android:id="@+id/password_textImputLayout_activityLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
