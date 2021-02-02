@@ -13,14 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.empresa.myapplication.marvelapp._model.local.AppDatabase
-import com.empresa.myapplication.marvelapp._model.local.DataSourceRoom
-import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
-import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
-import com.empresa.myapplication.marvelapp._view.adapters.FavoritesAdapter
-import com.empresa.myapplication.marvelapp._view.base.BasicMethods
-import com.empresa.myapplication.marvelapp._viewmodel.favorites.FavoritesViewModel
-import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
+import com.empresa.myapplication.marvelapp.model.local.AppDatabase
+import com.empresa.myapplication.marvelapp.model.local.DataSourceRoom
+import com.empresa.myapplication.marvelapp.model.local.FavoritesEntity
+import com.empresa.myapplication.marvelapp.model.repository.favoritos.FavoriteRepositoryImpl
+import com.empresa.myapplication.marvelapp.view.adapters.FavoritesAdapter
+import com.empresa.myapplication.marvelapp.view.base.BasicMethods
+import com.empresa.myapplication.marvelapp.viewModel.favorites.FavoritesViewModel
+import com.empresa.myapplication.marvelapp.viewModel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp.databinding.FragmentFavoritosBinding
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import java.util.ArrayList
@@ -52,12 +52,12 @@ class FavoritosFragment : Fragment(), BasicMethods,
 
         binding.viewModel = favoritosViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        /*binding.adapter = FavoritesAdapter(
+        binding.adapter = FavoritesAdapter(
             requireContext(),
             favoritesList,
             this,
             this
-        )*/
+        )
         return binding.root
     }
 

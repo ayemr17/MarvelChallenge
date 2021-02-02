@@ -8,12 +8,12 @@
 
     <fragment
         android:id="@+id/detallePersonajeFragment"
-        android:name="com.empresa.myapplication.marvelapp._view.personajes.DetallePersonajeFragment"
+        android:name="com.empresa.myapplication.marvelapp.view.personajes.DetallePersonajeFragment"
         android:label="fragment_detalle_personaje"
         tools:layout="@layout/fragment_detalle_personaje" />
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.empresa.myapplication.marvelapp._view.splash.SplashFragment"
+        android:name="com.empresa.myapplication.marvelapp.view.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.empresa.myapplication.marvelapp._view.home.ViewPagerFragment"
+        android:name="com.empresa.myapplication.marvelapp.view.home.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" >
         <action
@@ -54,7 +54,7 @@
         app:destination="@id/favoritosFragment" />
     <fragment
         android:id="@+id/loginFragmentNew"
-        android:name="com.empresa.myapplication.marvelapp._view.login.LoginFragmentNew"
+        android:name="com.empresa.myapplication.marvelapp.view.login.LoginFragmentNew"
         android:label="fragment_login_new"
         tools:layout="@layout/fragment_login_new" >
         <action
