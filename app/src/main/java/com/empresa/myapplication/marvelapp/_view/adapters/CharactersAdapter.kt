@@ -11,22 +11,25 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
+import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._view.adapters.base.BaseViewHolder
+import com.empresa.myapplication.marvelapp.databinding.ItemRecyclerviewPersonajesBinding
 import kotlinx.android.synthetic.main.item_recyclerview_personajes.view.*
 
 /**
  * Created by Ayelen Merigo on 24/8/2020.
  */
 
-class RecyclerViewListaPersonajesROOMAdapter(
+class CharactersAdapter(
     private val context: Context,
-    private val personajesList: List<FavoritesEntity>,
+    private val personajesList: List<Result>,
     private val itemClickListener: OnPersonajeClickListener,
     private val itemLongClickListener: OnLongPersonajeClickListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+        /*val binding = ItemRecyclerviewPersonajesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PersonajeViewHolder(binding.root)*/
         return PersonajeViewHolder(
             LayoutInflater.from(context)
                 .inflate(R.layout.item_recyclerview_personajes, parent, false)
@@ -43,8 +46,11 @@ class RecyclerViewListaPersonajesROOMAdapter(
         return personajesList.size
     }
 
-    inner class PersonajeViewHolder(itemView: View) : BaseViewHolder<FavoritesEntity>(itemView) {
-        override fun bind(item: FavoritesEntity, position: Int) {
+    inner class PersonajeViewHolder(view: View) : BaseViewHolder<Result>(view) {
+
+        private val binding = ItemRecyclerviewPersonajesBinding.bind(view)
+
+        override fun bind(item: Result, position: Int) {
 
             var options: RequestOptions = RequestOptions()
                 .centerCrop()
@@ -52,35 +58,34 @@ class RecyclerViewListaPersonajesROOMAdapter(
                 .priority(Priority.HIGH)
 
             Glide.with(context)
-                .load(Uri.parse(item.imagen))
+                .load(Uri.parse(item.thumbnail?.path + "." + item.thumbnail?.extension))
                 .apply(options)
                 .into(itemView.personaje_imageView_itemRecycler)
 
-            itemView.nombrePJ_textView_itemRecycler.text = item.nombre
-            if (item.descripcion.isNullOrEmpty()) {
-                itemView.descripcionPJ_textView_itemRecycler.text = context.getString(R.string.sin_descrip)
-            } else {
-                itemView.descripcionPJ_textView_itemRecycler.text = item.descripcion
-            }
+            with(binding) {
+                itemView.nombrePJ_textView_itemRecycler.text = item.name
+                if (item.description.isNullOrEmpty()) {
+                    itemView.descripcionPJ_textView_itemRecycler.text = context.getString(R.string.sin_descrip)
+                } else {
+                    itemView.descripcionPJ_textView_itemRecycler.text = item.description
+                }
 
-            itemView.setOnClickListener {
-                itemClickListener.onPersonajeClick(item)
-                notifyDataSetChanged()
-            }
+                itemView.setOnClickListener {
+                    itemClickListener.onPersonajeClick(item)
+                }
 
-            itemView.setOnLongClickListener {
-                notifyDataSetChanged()
-                return@setOnLongClickListener itemLongClickListener.onLongClickPersonajeListener(item, position)
+                itemView.setOnLongClickListener {
+                    return@setOnLongClickListener itemLongClickListener.onLongClickPersonajeListener(item)
+                }
             }
         }
     }
 
     interface OnPersonajeClickListener {
-        fun onPersonajeClick(pj: FavoritesEntity)
+        fun onPersonajeClick(pj: Result)
     }
 
     interface OnLongPersonajeClickListener {
-        fun onLongClickPersonajeListener(pj: FavoritesEntity, position: Int) : Boolean
+        fun onLongClickPersonajeListener(pj: Result) : Boolean
     }
-
 }

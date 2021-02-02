@@ -1,16 +1,9 @@
 package com.empresa.myapplication.marvelapp._viewmodel.personajes
 
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.*
-import com.empresa.myapplication.marvelapp._model.local.ChartEventModel
-import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
-import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
 import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryInter
-import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesAdapter
 import com.empresa.myapplication.marvelapp.vo.Resource
-import kotlinx.android.synthetic.main.fragment_lista_personajes.*
 import kotlinx.coroutines.*
 
 /**

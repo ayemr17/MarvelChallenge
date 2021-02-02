@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<!--
+
         <variable
             name="viewModel"
             type="com.empresa.myapplication.marvelapp._viewmodel.favorites.FavoritesViewModel" />
 
+<!--
         <variable
             name="adapter"
-            type="com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesROOMAdapter" />
+            type="com.empresa.myapplication.marvelapp._view.adapters.FavoritesAdapter" />
 -->
 
     </data>

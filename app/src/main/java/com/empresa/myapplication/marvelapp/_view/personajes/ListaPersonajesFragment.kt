@@ -20,7 +20,7 @@ import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
 import com.empresa.myapplication.marvelapp._model.repository.personajes.PersonajeRepositoryImpl
-import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesAdapter
+import com.empresa.myapplication.marvelapp._view.adapters.CharactersAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
@@ -30,8 +30,8 @@ import com.empresa.myapplication.marvelapp.databinding.FragmentListaPersonajesBi
 import com.empresa.myapplication.marvelapp.vo.Resource
 
 class ListaPersonajesFragment : Fragment(), BasicMethods,
-    RecyclerViewListaPersonajesAdapter.OnPersonajeClickListener,
-    RecyclerViewListaPersonajesAdapter.OnLongPersonajeClickListener {
+    CharactersAdapter.OnPersonajeClickListener,
+    CharactersAdapter.OnLongPersonajeClickListener {
 
     private var _binding: FragmentListaPersonajesBinding? = null
     private val binding get() = _binding!!
@@ -83,7 +83,7 @@ class ListaPersonajesFragment : Fragment(), BasicMethods,
                 is Resource.Success<*> -> {
                     binding.progressBar.visibility = View.GONE
                     binding.listaPjRecyclerView.adapter =
-                        RecyclerViewListaPersonajesAdapter(
+                        CharactersAdapter(
                             requireContext(),
                             it.data as List<Result>,
                             this,

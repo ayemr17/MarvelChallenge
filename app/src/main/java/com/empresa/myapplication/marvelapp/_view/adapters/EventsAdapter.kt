@@ -25,7 +25,7 @@ import java.util.*
  * Created by Ayelen Merigo on 25/8/2020.
  */
 
-class RecyclerViewListaEventosAdapter(
+class EventsAdapter(
     private val context: Context,
     private val eventoList: List<ResultEventos>,
     private val itemClickListener: OnEventoClickListener

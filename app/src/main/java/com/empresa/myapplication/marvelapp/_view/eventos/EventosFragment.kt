@@ -13,8 +13,8 @@ import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp._model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp._model.remote.pojos.eventos.ResultEventos
 import com.empresa.myapplication.marvelapp._model.repository.eventos.EventosRepositoryImpl
-import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListComicsAdapter
-import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaEventosAdapter
+import com.empresa.myapplication.marvelapp._view.adapters.ListComicsAdapter
+import com.empresa.myapplication.marvelapp._view.adapters.EventsAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.eventos.EventosViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.EventosVMFactory
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_eventos.progressBar
 import kotlinx.android.synthetic.main.item_recyclerview_eventos.view.*
 
 class EventosFragment : Fragment(), BasicMethods,
-    RecyclerViewListaEventosAdapter.OnEventoClickListener {
+    EventsAdapter.OnEventoClickListener {
 
     // inyectamos las dependencias necesarias
     private val eventosViewModel by viewModels<EventosViewModel> {
@@ -63,7 +63,7 @@ class EventosFragment : Fragment(), BasicMethods,
 
                     //cargamos el adapter para mostrar la lista de eventos
                     listEventos_recyclerView.adapter =
-                        RecyclerViewListaEventosAdapter(requireContext(),
+                        EventsAdapter(requireContext(),
                             result.data as List<ResultEventos>, this)
                 }
                 is Resource.Failure<*> -> {
@@ -92,7 +92,7 @@ class EventosFragment : Fragment(), BasicMethods,
     override fun onEventoClick(evento: ResultEventos, view : View) {
 
         view.listComics_recyclerView_eventos.adapter =
-            RecyclerViewListComicsAdapter(requireContext(), evento.comics?.items!!)
+            ListComicsAdapter(requireContext(), evento.comics?.items!!)
 
         if (evento.comics?.items!!.isEmpty()) {
             view.texto_title_comics.text = getString(R.string.sin_comics)

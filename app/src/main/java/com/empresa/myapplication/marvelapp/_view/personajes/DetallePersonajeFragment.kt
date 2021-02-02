@@ -23,7 +23,7 @@ import com.empresa.myapplication.marvelapp._model.local.DataSourceRoom
 import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
 import com.empresa.myapplication.marvelapp._model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
-import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaComicsAdapter
+import com.empresa.myapplication.marvelapp._view.adapters.ComicsAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
@@ -131,7 +131,7 @@ class DetallePersonajeFragment : Fragment(), BasicMethods {
     private fun loadAdapter() {
         // cargamos el recycler
         listComic_recyclerView_detalle.adapter =
-            RecyclerViewListaComicsAdapter(requireContext(), pj.comics?.items!!)
+            ComicsAdapter(requireContext(), pj.comics?.items!!)
     }
 
 

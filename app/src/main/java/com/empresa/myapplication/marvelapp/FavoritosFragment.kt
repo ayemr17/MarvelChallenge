@@ -17,7 +17,7 @@ import com.empresa.myapplication.marvelapp._model.local.AppDatabase
 import com.empresa.myapplication.marvelapp._model.local.DataSourceRoom
 import com.empresa.myapplication.marvelapp._model.local.FavoritesEntity
 import com.empresa.myapplication.marvelapp._model.repository.favoritos.FavoriteRepositoryImpl
-import com.empresa.myapplication.marvelapp._view.adapters.RecyclerViewListaPersonajesROOMAdapter
+import com.empresa.myapplication.marvelapp._view.adapters.FavoritesAdapter
 import com.empresa.myapplication.marvelapp._view.base.BasicMethods
 import com.empresa.myapplication.marvelapp._viewmodel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp._viewmodel.factorys.FavoritosVMFactory
@@ -26,8 +26,8 @@ import kotlinx.android.synthetic.main.app_bar_custom.*
 import java.util.ArrayList
 
 class FavoritosFragment : Fragment(), BasicMethods,
-    RecyclerViewListaPersonajesROOMAdapter.OnPersonajeClickListener,
-    RecyclerViewListaPersonajesROOMAdapter.OnLongPersonajeClickListener {
+    FavoritesAdapter.OnPersonajeClickListener,
+    FavoritesAdapter.OnLongPersonajeClickListener {
 
     val STATUS_LOGIN = "status_login"
     private lateinit var binding: FragmentFavoritosBinding
@@ -47,15 +47,12 @@ class FavoritosFragment : Fragment(), BasicMethods,
         savedInstanceState: Bundle?
     ): View? {
 
+        binding = DataBindingUtil.inflate(inflater,
+        R.layout.fragment_favoritos, container, false)
 
-        binding =
-            FragmentFavoritosBinding.inflate(LayoutInflater.from(context), null, false)
-
-        //binding = FragmentFavoritosBinding.inflate(inflater, container, false)
-
-        //binding.viewModel = favoritosViewModel
-        /*binding.lifecycleOwner = viewLifecycleOwner
-        binding.adapter = RecyclerViewListaPersonajesROOMAdapter(
+        binding.viewModel = favoritosViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        /*binding.adapter = FavoritesAdapter(
             requireContext(),
             favoritesList,
             this,
@@ -83,7 +80,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
         favoritosViewModel.favoritesList.observe(viewLifecycleOwner, Observer { list ->
             binding.progressBar.visibility = View.GONE
             binding.favoritosRecyclerViewFavoritosFragment.adapter =
-                RecyclerViewListaPersonajesROOMAdapter(
+                FavoritesAdapter(
                     requireContext(),
                     list,
                     this,
