@@ -11,7 +11,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.empresa.myapplication.marvelapp"
+        applicationId "com.empresa.myapplication"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
@@ -22,8 +22,25 @@ android {
 
     buildTypes {
         release {
+//            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+
+    productFlavors {
+        marvel {
+            applicationIdSuffix ".marvelapp"
+            versionNameSuffix "-marvel"
+        }
+        dc {
+            applicationIdSuffix ".dcapp"
+            versionNameSuffix "-dc"
         }
     }
 
