@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.empresa.myapplication.marvelapp.R
-import com.empresa.myapplication.marvelapp.view.base.BasicMethods
-import com.empresa.myapplication.marvelapp.viewModel.login.LoginViewModel
 import com.empresa.myapplication.marvelapp.databinding.FragmentLoginNewBinding
 import com.empresa.myapplication.marvelapp.util.ProviderType
+import com.empresa.myapplication.marvelapp.view.base.BasicMethods
+import com.empresa.myapplication.marvelapp.viewModel.login.LoginViewModel
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException

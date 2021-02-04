@@ -1,6 +1,9 @@
 package com.empresa.myapplication.marvelapp.viewModel.favorites
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.empresa.myapplication.marvelapp.model.local.FavoritesEntity
 import com.empresa.myapplication.marvelapp.model.repository.favoritos.FavoritRepositoryInter
 import kotlinx.coroutines.CoroutineScope

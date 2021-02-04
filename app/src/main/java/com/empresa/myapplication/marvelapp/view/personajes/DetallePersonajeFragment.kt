@@ -25,8 +25,8 @@ import com.empresa.myapplication.marvelapp.model.remote.pojos.personajes.Result
 import com.empresa.myapplication.marvelapp.model.repository.favoritos.FavoriteRepositoryImpl
 import com.empresa.myapplication.marvelapp.view.adapters.ComicsAdapter
 import com.empresa.myapplication.marvelapp.view.base.BasicMethods
-import com.empresa.myapplication.marvelapp.viewModel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp.viewModel.factorys.FavoritosVMFactory
+import com.empresa.myapplication.marvelapp.viewModel.favorites.FavoritesViewModel
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import kotlinx.android.synthetic.main.fragment_detalle_personaje.*
 

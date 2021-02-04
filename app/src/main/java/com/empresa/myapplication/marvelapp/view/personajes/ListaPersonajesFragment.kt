@@ -2,17 +2,18 @@ package com.empresa.myapplication.marvelapp.view.personajes
 
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.empresa.myapplication.marvelapp.R
+import com.empresa.myapplication.marvelapp.databinding.FragmentListaPersonajesBinding
 import com.empresa.myapplication.marvelapp.model.local.AppDatabase
 import com.empresa.myapplication.marvelapp.model.local.DataSourceRoom
 import com.empresa.myapplication.marvelapp.model.local.FavoritesEntity
@@ -22,11 +23,10 @@ import com.empresa.myapplication.marvelapp.model.repository.favoritos.FavoriteRe
 import com.empresa.myapplication.marvelapp.model.repository.personajes.PersonajeRepositoryImpl
 import com.empresa.myapplication.marvelapp.view.adapters.CharactersAdapter
 import com.empresa.myapplication.marvelapp.view.base.BasicMethods
-import com.empresa.myapplication.marvelapp.viewModel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp.viewModel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp.viewModel.factorys.PersonajeVMFactory
+import com.empresa.myapplication.marvelapp.viewModel.favorites.FavoritesViewModel
 import com.empresa.myapplication.marvelapp.viewModel.personajes.PersonajesViewModel
-import com.empresa.myapplication.marvelapp.databinding.FragmentListaPersonajesBinding
 import com.empresa.myapplication.marvelapp.vo.Resource
 
 class ListaPersonajesFragment : Fragment(), BasicMethods,

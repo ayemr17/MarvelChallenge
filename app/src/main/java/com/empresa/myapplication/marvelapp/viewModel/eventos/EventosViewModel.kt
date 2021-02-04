@@ -1,6 +1,8 @@
 package com.empresa.myapplication.marvelapp.viewModel.eventos
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.empresa.myapplication.marvelapp.model.remote.pojos.eventos.ResultEventos
 import com.empresa.myapplication.marvelapp.model.repository.eventos.EventosRepositoryInter
 import com.empresa.myapplication.marvelapp.vo.Resource

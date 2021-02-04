@@ -5,12 +5,12 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.empresa.myapplication.marvelapp.databinding.ActivityMainBinding
 import com.empresa.myapplication.marvelapp.view.base.BaseActivity
 import com.empresa.myapplication.marvelapp.view.base.BasicMethods
 import com.empresa.myapplication.marvelapp.view.home.ViewPagerFragment
 import com.empresa.myapplication.marvelapp.view.login.LoginFragmentNew
 import com.empresa.myapplication.marvelapp.view.splash.SplashFragment
-import com.empresa.myapplication.marvelapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_custom.*
 
