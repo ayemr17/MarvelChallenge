@@ -44,7 +44,7 @@ class SplashFragment : Fragment() {
     // para generar animacion transitoria de splash
     private fun launchAnimation() {
         Glide.with(this)
-            .load(R.drawable.marvel_gif)
+            .load(R.drawable.splash_gif)
             .diskCacheStrategy(
                 DiskCacheStrategy.RESOURCE
             )

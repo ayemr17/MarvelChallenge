@@ -41,7 +41,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:src="@drawable/marvel_png_login"
+                android:src="@drawable/image_png_login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
