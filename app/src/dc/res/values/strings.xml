@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DC Challenge</string>
+    <string name="facebook_app_id">2738927489708501</string>
+    <string name="facebook_application_id">2738927489708501</string>
+    <string name="fb_login_protocol_scheme">fb2738927489708501</string>
+    <string name="hash">Lk7I6DQgu6YxdFUgXspYzLk4760=</string>
+    <string name="personajes">Personajes</string>
+    <string name="eventos">Eventos</string>
+    <string name="desloguearse">Sign Out</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--DC-->
+    <string name="marvel_public_key">ce9b52218babde653f53f0993e5c263a</string>
+    <string name="marvel_private_key">c1ae35ca4eb2492572072cbe1981d2672403fdd2</string>
+    <string name="nombrepersonaje">NombrePersonaje</string>
+    <string name="descrpcionpersonaje">DescrpcionPersonaje</string>
+    <string name="comics_en_los_que_aparece">COMICS EN LOS QUE APARECE</string>
+    <string name="nombrecomic">NombreComic</string>
+    <string name="preferencias">preferenciasDc</string>
+    <string name="deslogueado">deslogueado</string>
+    <string name="status_login">status_login</string>
+    <string name="logueado">logueado</string>
+    <string name="fallo_deslogueo">Algo falló al desloguearse</string>
+    <string name="sin_descripcion">No posee una descripcion para mostrar.</string>
+    <string name="comics_a_discutir">COMICS A DISCUTIR</string>
+    <string name="sin_comics">No tiene comics a debatir.</string>
+    <string name="sin_descrip">Este personaje no posee una descripción agregada.</string>
+    <string name="fecha_inicio">Sin fecha de inicio</string>
+    <string name="fecha_fin">Sin fecha de finalización</string>
+    <string name="sin_favoritos">No has ingresado \n ningun favorito. \n \n \n Para agregar favoritos mantenga apretado el personaje que desee agregar como favorito.</string>
+
+</resources>
