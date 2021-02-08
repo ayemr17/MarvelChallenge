@@ -1,11 +1,11 @@
 package com.empresa.myapplication.marvelapp.view.eventos
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,14 +13,13 @@ import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp.model.remote.DataSourceApi
 import com.empresa.myapplication.marvelapp.model.remote.pojos.eventos.ResultEventos
 import com.empresa.myapplication.marvelapp.model.repository.eventos.EventosRepositoryImpl
-import com.empresa.myapplication.marvelapp.view.adapters.ListComicsAdapter
 import com.empresa.myapplication.marvelapp.view.adapters.EventsAdapter
+import com.empresa.myapplication.marvelapp.view.adapters.ListComicsAdapter
 import com.empresa.myapplication.marvelapp.view.base.BasicMethods
 import com.empresa.myapplication.marvelapp.viewModel.eventos.EventosViewModel
 import com.empresa.myapplication.marvelapp.viewModel.factorys.EventosVMFactory
 import com.empresa.myapplication.marvelapp.vo.Resource
 import kotlinx.android.synthetic.main.fragment_eventos.*
-import kotlinx.android.synthetic.main.fragment_eventos.progressBar
 import kotlinx.android.synthetic.main.item_recyclerview_eventos.view.*
 
 class EventosFragment : Fragment(), BasicMethods,
