@@ -11,12 +11,12 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.empresa.myapplication"
+        applicationId "com.empresa.myapplication.marvelapp"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,19 +25,20 @@ android {
 //            debuggable false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TYPE", '"release"'
         }
 
         debug {
-            //applicationIdSuffix ".debug"
             minifyEnabled false
-            versionNameSuffix ".debug"
+            versionNameSuffix "_debug"
             debuggable true
+            buildConfigField "String", "TYPE", '"debug"'
         }
     }
 
     flavorDimensions "whitelabel"
     productFlavors {
-        marvel {
+/*        marvel {
             dimension "whitelabel"
             applicationIdSuffix ".marvelapp"
             versionNameSuffix "-marvel"
@@ -46,6 +47,18 @@ android {
             dimension "whitelabel"
             applicationIdSuffix ".dcapp"
             versionNameSuffix "-dc"
+        }*/
+        free {
+            applicationIdSuffix ".free"
+            versionNameSuffix "-free"
+            versionCode 1
+            versionName "1.0"
+        }
+        paid {
+            applicationIdSuffix ".paid"
+            versionNameSuffix "-paid"
+            versionCode 1
+            versionName "1.0"
         }
     }
 
@@ -118,4 +131,5 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.6"
     kapt "androidx.room:room-compiler:2.2.6"
 
+    freeImplementation 'com.google.android.gms:play-services-ads:19.7.0'
 }

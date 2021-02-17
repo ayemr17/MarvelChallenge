@@ -2,6 +2,7 @@ package com.empresa.myapplication.marvelapp
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,9 @@ import com.empresa.myapplication.marvelapp.view.adapters.FavoritesAdapter
 import com.empresa.myapplication.marvelapp.view.base.BasicMethods
 import com.empresa.myapplication.marvelapp.viewModel.factorys.FavoritosVMFactory
 import com.empresa.myapplication.marvelapp.viewModel.favorites.FavoritesViewModel
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import java.util.*
 
@@ -149,6 +153,7 @@ class FavoritosFragment : Fragment(), BasicMethods,
     override fun onPersonajeClick(pj: FavoritesEntity) {}
 
     private fun setupRecyclerView() {
+
         binding.favoritosRecyclerViewFavoritosFragment.layoutManager =
             LinearLayoutManager(requireContext())
     }

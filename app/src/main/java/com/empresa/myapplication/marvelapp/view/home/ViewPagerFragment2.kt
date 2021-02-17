@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.empresa.myapplication.marvelapp.BuildConfig
 import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp.util.ProviderType
 import com.empresa.myapplication.marvelapp.view.adapters.MyViewPagerAdapter
@@ -18,11 +19,13 @@ import com.empresa.myapplication.marvelapp.view.eventos.EventosFragment
 import com.empresa.myapplication.marvelapp.view.personajes.ListaPersonajesFragment
 import com.facebook.login.LoginManager
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.app_bar_custom.*
 import kotlinx.android.synthetic.main.fragment_view_pager.*
 
-class ViewPagerFragment : Fragment(), BasicMethods {
+class ViewPagerFragment2 : Fragment(), BasicMethods {
 
     val STATUS_LOGIN = "status_login"
     private var email: String = ""
@@ -66,7 +69,10 @@ class ViewPagerFragment : Fragment(), BasicMethods {
 
     override fun initListeners() {
         favoritos_imageView_appbar.setOnClickListener {
+            // iniciamos la publicidad de video temporal
+
             findNavController().navigate(R.id.action_viewPagerFragment_to_favoritosFragment)
+
         }
         signout_imageView_appbar.setOnClickListener {
             signOut()
@@ -104,7 +110,7 @@ class ViewPagerFragment : Fragment(), BasicMethods {
         if (provider.equals(ProviderType.FACEBOOK.name)) {
             try {
                 LoginManager.getInstance().logOut()
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 Log.e("logOffFacebook", "signOut: ${e.message}")
             }
         }

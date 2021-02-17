@@ -11,7 +11,10 @@ import com.empresa.myapplication.marvelapp.view.base.BasicMethods
 import com.empresa.myapplication.marvelapp.view.home.ViewPagerFragment
 import com.empresa.myapplication.marvelapp.view.login.LoginFragmentNew
 import com.empresa.myapplication.marvelapp.view.splash.SplashFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.free.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.nav_host_fragment
 import kotlinx.android.synthetic.main.app_bar_custom.*
 
 class MainActivity : BaseActivity(), BasicMethods {
@@ -35,6 +38,12 @@ class MainActivity : BaseActivity(), BasicMethods {
     }
 
     override fun init() {
+        if (BuildConfig.FLAVOR == "free") {
+            MobileAds.initialize(this) {}
+
+            // aca hacemos que cargue el anuncio
+            adView.loadAd(AdRequest.Builder().build())
+        }
     }
 
     override fun initListeners() {
