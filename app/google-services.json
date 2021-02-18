@@ -100,6 +100,64 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957797159189:android:7640f7bcc2868616e2191c",
+        "android_client_info": {
+          "package_name": "com.empresa.myapplication.dcapp.free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957797159189-4tmoappc4r6d9ipmaskj7qb8crbks9i8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxrxM7K1K_dsJpE6TM_tKfQB7WbKUeXJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957797159189-4tmoappc4r6d9ipmaskj7qb8crbks9i8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483713703510:android:818292045bf83f6b5665f7",
+        "android_client_info": {
+          "package_name": "com.empresa.myapplication.dcapp.paid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483713703510-97vubvs8l440eevd8ifgug0tgofg27ed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNZg4L2asLgqKcTfAUe4fvkTFt2tfB08U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483713703510-97vubvs8l440eevd8ifgug0tgofg27ed.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -11,7 +11,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.empresa.myapplication.marvelapp"
+        applicationId "com.empresa.myapplication"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
@@ -36,9 +36,9 @@ android {
         }
     }
 
-    flavorDimensions "whitelabel"
+    flavorDimensions "whitelabel", "version"
     productFlavors {
-/*        marvel {
+        marvel {
             dimension "whitelabel"
             applicationIdSuffix ".marvelapp"
             versionNameSuffix "-marvel"
@@ -47,16 +47,18 @@ android {
             dimension "whitelabel"
             applicationIdSuffix ".dcapp"
             versionNameSuffix "-dc"
-        }*/
+        }
         free {
             applicationIdSuffix ".free"
             versionNameSuffix "-free"
+            dimension "version"
             versionCode 1
             versionName "1.0"
         }
         paid {
             applicationIdSuffix ".paid"
             versionNameSuffix "-paid"
+            dimension "version"
             versionCode 1
             versionName "1.0"
         }
