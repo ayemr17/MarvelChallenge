@@ -60,6 +60,8 @@ class ViewPagerFragment : Fragment(), BasicMethods {
             Log.e("getArgumentsViewPage", "onViewCreated: ${e.message}")
         }
 
+        MobileAds.initialize(requireContext()) {}
+
         mInterstitialAd = InterstitialAd(requireContext())
         mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
 
