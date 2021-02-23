@@ -8,7 +8,10 @@ import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModel
+import com.empresa.myapplication.marvelapp.R
 import com.empresa.myapplication.marvelapp.model.repository.DatabaseRepository
+import com.empresa.myapplication.marvelapp.util.sharedPreferences.SharedPreferencesImpl
+import com.empresa.myapplication.marvelapp.util.sharedPreferences.SharedPreferencesRepository
 import com.empresa.myapplication.marvelapp.view.login.LoginFragmentNew
 
 /**
@@ -18,6 +21,7 @@ import com.empresa.myapplication.marvelapp.view.login.LoginFragmentNew
 class LoginViewModel : ViewModel() {
 
     private val loginFragmentNew = LoginFragmentNew()
+    //private val sharedPreferencesRepository: SharedPreferencesRepository =
 
     fun crearDatabase(application: Application) {
         var mDatabaseRepository: DatabaseRepository? = DatabaseRepository(application)
@@ -71,6 +75,10 @@ class LoginViewModel : ViewModel() {
         // check if no view has focus:
         val v = (ctx as Activity).currentFocus ?: return
         inputManager.hideSoftInputFromWindow(v.windowToken, 0)
+    }
+
+    private fun saveStatusLogin(status: String) {
+
     }
 
 }

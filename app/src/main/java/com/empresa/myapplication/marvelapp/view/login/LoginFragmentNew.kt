@@ -240,6 +240,7 @@ class LoginFragmentNew : Fragment(), BasicMethods {
     fun goHome(email: String, provider: ProviderType) {
         loginViewModel.hideKeyboard(requireContext())
         loginViewModel.crearDatabase(requireActivity().application)
+
         saveStatusLogin(getString(R.string.logueado))
 
         val bundle = Bundle()
