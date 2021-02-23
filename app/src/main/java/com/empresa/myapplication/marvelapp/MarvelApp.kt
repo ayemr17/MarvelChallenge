@@ -6,6 +6,8 @@ import android.content.SharedPreferences
 
 class MarvelApp : Application() {
 
+    //private var sAnalytics: GoogleAnalytics? = null
+
     companion object {
         var instance: MarvelApp? = null
 
@@ -25,4 +27,18 @@ class MarvelApp : Application() {
     init {
         instance = this
     }
+
+    /*override fun onCreate() {
+        super.onCreate()
+        sAnalytics = GoogleAnalytics.getInstance(this)
+
+        *//*if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }*//*
+
+        startKoin {
+            androidContext(this@FlowApp)
+            modules(appModules)
+        }
+    }*/
 }
